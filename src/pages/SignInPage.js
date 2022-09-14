@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { ThreeDots } from "react-loader-spinner"
 import { useContext, useState } from "react"
+import UserContext from "../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+import { postSignIn } from "../services/api";
 
 export default function SignInPage() {
 
