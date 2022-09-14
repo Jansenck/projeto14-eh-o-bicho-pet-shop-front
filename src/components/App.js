@@ -31,7 +31,7 @@ export default function App() {
       value = {{
       userData, setUserData, 
       config, setConfig
-      }}>
+    }}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <BrowserRouter>

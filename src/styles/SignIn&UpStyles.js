@@ -5,7 +5,7 @@ const Input = styled.input`
     width: 100%;
     border-radius: 5px;
     margin-top: 10px;
-    border: none;
+    border: 1px solid #02c39a;
     outline: none;
     font-family: "Arial";
     font-size: 20px;
@@ -15,12 +15,13 @@ const Input = styled.input`
     padding-left: 10px;
     box-sizing: border-box;
     background-color: ${props => props.background};
+
     &&::placeholder {
         font-family: "Arial";
         font-size: 20px;
         font-weight: 400;
         line-height: 23px;
-        color: #000000;
+        color: #02c39a;
         padding-left: 10px;
     }
 `
@@ -41,6 +42,8 @@ const Button = styled.button`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
+
     &&:hover {
         filter: brightness(1.1);
     }
