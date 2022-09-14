@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import ProductPage from "../pages/ProductPage";
 import SignInPage from "../pages/SignInPage"
+import SignUpPage from "../pages/SignUpPage"
 import GlobalStyle from "../styles/GlobalStyles";
 import UserContext from "../contexts/UserContext"
 
@@ -38,6 +39,7 @@ export default function App() {
           <Routes>
             <Route path="/product" element={<ProductPage />}></Route>
             <Route path="/signin" element={<SignInPage />}></Route>
+            <Route path="/signup" element={<SignUpPage />}></Route>
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
