@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import ProductPage from "../pages/ProductPage";
 
 import GlobalStyle from "../styles/GlobalStyles";
 
@@ -19,7 +20,7 @@ export default function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/product" element={<ProductPage />}></Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
