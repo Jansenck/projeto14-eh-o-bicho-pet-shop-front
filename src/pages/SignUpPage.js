@@ -82,6 +82,12 @@ export default function SignUp() {
                     <Input placeholder = "Email" type = "email" name = "email" required disabled = {disabled} 
                     background = {background} color = {color}
                     onChange = {event => handleForm({name: event.target.name, value: event.target.value}, form, setForm)}/>
+                    <Input placeholder = "Endereço" type = "text" name = "adress" required disabled = {disabled} 
+                    background = {background} color = {color}
+                    onChange = {event => handleForm({name: event.target.name, value: event.target.value}, form, setForm)}/>
+                    <Input placeholder = "Cpf (somente números)" type = "text" name = "cpf" required disabled = {disabled} 
+                    background = {background} color = {color}
+                    onChange = {event => handleForm({name: event.target.name, value: event.target.value}, form, setForm)}/>
                     <Input placeholder = "Senha" type = "password" name = "password" required disabled = {disabled} 
                     background = {background} color = {color}
                     onChange = {event => handleForm({name: event.target.name, value: event.target.value}, form, setForm)}/>
