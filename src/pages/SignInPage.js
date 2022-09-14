@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { ThreeDots } from "react-loader-spinner"
 import { useContext, useState } from "react"
 import UserContext from "../contexts/UserContext";
-import { useNavigate } from "react-router-dom";
-import { postSignIn } from "../services/api";
+import { Link, useNavigate } from "react-router-dom"
+import { postSignIn, handleForm } from "../services/api";
+import { Input, Button, Text } from "../styles/SignIn&UpStyles";
 
 export default function SignInPage() {
 
@@ -80,3 +81,8 @@ export default function SignInPage() {
     </Container>
     )
 }
+
+const Container = styled.div`
+    margin: 140px auto;
+    width: 327px;
+`
