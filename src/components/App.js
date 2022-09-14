@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import ProductPage from "../pages/ProductPage";
-
+import SignInPage from "../pages/SignInPage"
 import GlobalStyle from "../styles/GlobalStyles";
 
 const theme = {
@@ -21,6 +21,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/product" element={<ProductPage />}></Route>
+          <Route path="/signin" element={<SignInPage />}></Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
