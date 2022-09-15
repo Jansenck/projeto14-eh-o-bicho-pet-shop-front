@@ -4,14 +4,14 @@ export default function Footer () {
 
     return (
         <Container>
-            <Adress>
-                Rua Dr. Felipe Ribeiro, número 478, Rio de Janeiro, RJ. 
-            </Adress>
-            <Line/>
             <Phone>
                 <ion-icon name="call-outline"></ion-icon>
                 <p>2609-4558</p>
             </Phone>
+            <Line/>
+            <Adress>
+                Rua Dr. Felipe Ribeiro, número 478, Rio de Janeiro, RJ. 
+            </Adress>
             <Line/>
             <Social>
                 <ion-icon name="logo-instagram"></ion-icon>
@@ -46,6 +46,7 @@ const Phone = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-left: 10px;
 
     && ion-icon {
         margin-left: 40%;
@@ -59,9 +60,10 @@ const Phone = styled.div`
 const Social = styled.div`
     font-size: 20px;
     color: white;
+    margin-right: 10px;
 
     && ion-icon {
-        margin: 0 5px;
+        margin-left: 5px;
     }
 `
 const Line = styled.div`

@@ -43,7 +43,6 @@ const Button = styled.button`
     align-items: center;
     cursor: pointer;
 
-
     &&:hover {
         filter: brightness(1.1);
     }

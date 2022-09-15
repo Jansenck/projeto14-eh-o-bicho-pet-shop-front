@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom"
-import { useState } from "react";
 
 
 export default function SideBar({display, setDisplay, showMenu}) {
@@ -11,19 +10,19 @@ export default function SideBar({display, setDisplay, showMenu}) {
                 <ion-icon name="close-outline" onClick = {showMenu}></ion-icon>
                 <List>
                     <TextList>
-                        <Link to = {"/dog"}>
+                        <Link to = {"/dogs"}>
                         <div>
                             <p>Cães</p>
                         </div>
                         </Link>
-                        <Link to = {"/cat"}>
+                        <Link to = {"/cats"}>
                             <div>
                                 <p>Gatos</p>
                             </div>
                         </Link>
-                        <Link to = {"/bunny"}>
+                        <Link to = {"/fish"}>
                             <div className="last">
-                                <p>Coelhos</p>
+                                <p>Peixes</p>
                             </div>
                         </Link>
                         </TextList>
