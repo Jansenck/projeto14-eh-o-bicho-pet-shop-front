@@ -1,66 +1,78 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-
-const data = [
-  {
-    title: "Ração Royal Canin Maxi",
-    subtitle: "Para Cães Adultos de Porte Grande 15kg",
-    price: 391.59,
-    description:
-      " Indicada para cães; Ideal para pets de grande porte; Oferece todos nutrientes necessários para uma vida saudável; Proporciona maior aporte para os ossos e articulações; Contém fórmula enriquecida com ômega 3, Disponível em embalagem de 15 kg.",
-    image: "https://static.petz.com.br/fotos/1660162896325.jpg",
-    category: "dog",
-  },
-];
+import { getSingleProduct } from "../services/api";
 
 export default function ProductPage() {
+  const [product, setProduct] = useState({});
+  const { productId } = useParams();
+
+  useEffect(() => {
+    const promise = getSingleProduct(productId);
+
+    promise.then((res) => {
+      setProduct(res.data);
+    });
+  }, [productId]);
+
   return (
     <div>
+      {/* TODO:Alterar o Header */}
       <Header>Aqui vai o Header (comum a todas as páginas)</Header>
-      {data.map((post) => (
-        <ContentWrapper>
-          <ProductTitle>{post.title}</ProductTitle>
-          <SubTitle>{post.subtitle}</SubTitle>
+      <ContentWrapper>
+        <ProductTitle>{product.title}</ProductTitle>
+        <SubTitle>{product.subtitle}</SubTitle>
 
-          <img src={post.image} alt={post.title} />
-          <Price>R$ {post.price}</Price>
-          <Description>
-            <h4>Descrição: </h4>
-            <p>{post.description}</p>
-          </Description>
-        </ContentWrapper>
-      ))}
+        <img src={product.image} alt={product.title} />
+        <Price>R$ {product.price}</Price>
+        <BuyButton>Adicionar ao Carrinho</BuyButton>
+
+        <Description>
+          <h4>Descrição: </h4>
+          <Separator></Separator>
+          <p>{product.description}</p>
+        </Description>
+      </ContentWrapper>
+
+      {/* TODO:Alterar o Footer */}
       <Footer>Aqui vai o Footer (comum a todas as páginas)</Footer>
     </div>
   );
 }
 
-const ProductTitle = styled.h2`
+const ProductTitle = styled.h1`
   font-size: 20px;
+  font-weight: 700;
   margin-bottom: 7px;
-  color: ${(props) => props.theme.lightgreen};
+  margin-right: 20px;
+  color: ${(props) => props.theme.darkblue};
 `;
 const SubTitle = styled.p`
   font-size: 14px;
   margin-bottom: 7px;
+
   color: ${(props) => props.theme.black};
 `;
 
 const Price = styled.h4`
-  font-family: "Dosis", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 25px;
   margin-bottom: 20px;
   color: ${(props) => props.theme.darkblue};
 `;
 
 const Description = styled.div`
+  margin-bottom: 150px;
   h4 {
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
   }
 
   p {
     line-height: 22px;
+    margin-right: 30px;
+    text-align: justify;
   }
 `;
 
@@ -69,7 +81,7 @@ const Header = styled.header`
   width: 100vw;
   padding: 20px;
   color: ${(props) => props.theme.lightyellow};
-  background: ${(props) => props.theme.darkblue};
+  background: ${(props) => props.theme.black};
   position: fixed;
   top: 0;
   display: flex;
@@ -82,8 +94,8 @@ const Footer = styled.footer`
   height: 100px;
   width: 100vw;
   padding: 20px;
-  color: ${(props) => props.theme.black};
-  background: ${(props) => props.theme.lightgreen};
+  color: ${(props) => props.theme.lightyellow};
+  background: ${(props) => props.theme.black};
   position: fixed;
   bottom: 0;
   display: flex;
@@ -93,10 +105,28 @@ const Footer = styled.footer`
 `;
 
 const ContentWrapper = styled.div`
-  margin: 100px 10px 150px 20px;
+  margin: 100px 10px 10px 20px;
 
   img {
     width: 100%;
     height: 100%;
   }
+`;
+
+const BuyButton = styled.button`
+  height: 40px;
+  display: block;
+  width: calc(100vw - 150px);
+  background-color: ${(props) => props.theme.lightgreen};
+  margin: 40px auto 30px;
+  font-size: 15px;
+  color: ${(props) => props.theme.white};
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+`;
+
+const Separator = styled.div`
+  border: solid 1px black;
+  margin: 8px 30px 10px 0;
 `;
