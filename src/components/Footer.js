@@ -39,6 +39,7 @@ const Adress = styled.p`
     text-align: center;
     padding-top: 10px;
     line-height: 15px;
+    
 `
 const Phone = styled.div`
     color: white;
@@ -46,28 +47,34 @@ const Phone = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 10px;
+    align-items: center;
+    width: 33%;
 
     && ion-icon {
-        margin-left: 40%;
         font-size: 20px;
+        margin-bottom: 10px;
     }
 
     && p {
-        font-size: 10px;
+        font-size: 12px;
     }
 `
 const Social = styled.div`
     font-size: 20px;
     color: white;
-    margin-right: 10px;
+    
+    width: 33%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
 
     && ion-icon {
-        margin-left: 10px;
+        margin: 4px 0;
     }
 `
 const Line = styled.div`
     width: 1px;
     height: 20px;
-    border-right: 1px solid white;
+    
 `

@@ -11,9 +11,9 @@ export default function Logo () {
 }
 
 const Container = styled.div`
-    width: 180px;
-    margin: 20px auto;
-    font-family: "Arial";
+    width: 200px;
+    margin: 100px auto;
+    font-family: 'Kalam', cursive;
     
     && h1 {
         font-size: 40px;

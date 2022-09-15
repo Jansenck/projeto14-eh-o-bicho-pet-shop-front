@@ -88,6 +88,6 @@ export default function SignInPage() {
 }
 
 const Container = styled.div`
-    margin: 140px auto;
+    margin: 60px auto;
     width: 327px;
 `
