@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
 import GlobalStyle from "../styles/GlobalStyles";
+import CartPage from "../pages/CartPage";
 
 const theme = {
   white: "#FFFFFF",
@@ -19,7 +20,8 @@ export default function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/" element={<p>Home Page</p>}></Route>
+          <Route path="/cart" element={<CartPage/>}></Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
