@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import ProductPage from "../pages/ProductPage";
 import SignInPage from "../pages/SignInPage"
 import SignUpPage from "../pages/SignUpPage"
+import HomePage from "../pages/HomePage";
 import GlobalStyle from "../styles/GlobalStyles";
 import UserContext from "../contexts/UserContext"
 
@@ -37,6 +38,7 @@ export default function App() {
         <GlobalStyle />
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<HomePage />}></Route>
             <Route path="/product" element={<ProductPage />}></Route>
             <Route path="/signin" element={<SignInPage />}></Route>
             <Route path="/signup" element={<SignUpPage />}></Route>

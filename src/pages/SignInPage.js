@@ -38,7 +38,7 @@ export default function SignInPage() {
                     "Authorization": `Bearer ${token}`
             }})
 
-            navigate("/home")
+            navigate("/")
 
         } catch (error) {
 
