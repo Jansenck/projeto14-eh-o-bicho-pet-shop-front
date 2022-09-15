@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { getSingleProduct } from "../services/api";
+import UserContext from "../contexts/UserContext";
+import { getSingleProduct, selectProduct } from "../services/api";
 
 export default function ProductPage() {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
+  const navigate = useNavigate();
+  const { config } = useContext(UserContext);
 
   useEffect(() => {
     const promise = getSingleProduct(productId);
@@ -15,22 +18,43 @@ export default function ProductPage() {
     });
   }, [productId]);
 
+  async function AddtoCart(e) {
+    e.preventDefault();
+
+    try {
+      await selectProduct(productId, config);
+      alert("Produto adicionado ao carrinho com sucesso!");
+    } catch (err) {
+      const status = err.response.status;
+      if (status === 401) {
+        navigate("/signin");
+        return;
+      }
+      alert("Ops! Tivemos um problema e estamos trabalhando nisso.");
+    }
+  }
+
   return (
     <div>
       {/* TODO:Alterar o Header */}
       <Header>Aqui vai o Header (comum a todas as páginas)</Header>
+
       <ContentWrapper>
         <ProductTitle>{product.title}</ProductTitle>
         <SubTitle>{product.subtitle}</SubTitle>
 
         <img src={product.image} alt={product.title} />
-        <Price>R$ {product.price}</Price>
-        <BuyButton>Adicionar ao Carrinho</BuyButton>
+        <Price>R$ {product.price?.toFixed(2).replace(".", ",")}</Price>
+        <BuyButton onClick={AddtoCart}>Adicionar ao Carrinho</BuyButton>
 
         <Description>
           <h4>Descrição: </h4>
           <Separator></Separator>
           <p>{product.description}</p>
+          <h2>
+            <strong>Categoria:</strong>{" "}
+            {product.category?.replace("dog", "cachorro")}
+          </h2>
         </Description>
       </ContentWrapper>
 
@@ -73,6 +97,10 @@ const Description = styled.div`
     line-height: 22px;
     margin-right: 30px;
     text-align: justify;
+  }
+
+  h2 {
+    margin-top: 20px;
   }
 `;
 
@@ -129,4 +157,5 @@ const BuyButton = styled.button`
 const Separator = styled.div`
   border: solid 1px black;
   margin: 8px 30px 10px 0;
+  background-color: ${(props) => props.theme.black};
 `;

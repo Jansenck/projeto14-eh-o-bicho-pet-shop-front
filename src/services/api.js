@@ -23,4 +23,8 @@ function getSingleProduct(productId) {
   return axios.get(`${BASE_URL}/products/${productId}`);
 }
 
-export { postSignIn, postSignUp, handleForm, getSingleProduct };
+function selectProduct(productId, config) {
+  return axios.post(`${BASE_URL}/products/${productId}`, {}, config);
+}
+
+export { postSignIn, postSignUp, handleForm, getSingleProduct, selectProduct };
