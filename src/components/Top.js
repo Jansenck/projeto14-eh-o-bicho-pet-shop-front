@@ -8,9 +8,11 @@ import { useState } from "react";
 export default function Top () {
 
     const [display, setDisplay] = useState("none")
+    const [margin, setMargin] = useState("0px")
 
     function showMenu() {
         display === "none" ? setDisplay("flex") : setDisplay("none")
+        display === "none" ? setMargin("80px") : setMargin("0px")
     }
 
     return (
@@ -31,7 +33,7 @@ export default function Top () {
                     </Link>
                 </Icons>
             </Container>
-            <SubTop show = {display}>
+            <SubTop show = {display} margin = {margin}>
                 <p>Cães</p>
                 <p>Gatos</p>
                 <p>Coelhos</p>
@@ -75,7 +77,7 @@ const Icons = styled.div`
 `
 const SubTop = styled.div`
     width: 100vw;
-    margin-top: 80px;
+    margin-top: ${props => props.margin};
     height: 40px;
     background-color: #02c39a;
     display: ${props => props.show};
@@ -84,4 +86,5 @@ const SubTop = styled.div`
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     opacity: 0.5;
+    transition: all 10s linear;
 `
