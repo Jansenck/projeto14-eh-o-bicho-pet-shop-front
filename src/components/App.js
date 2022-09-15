@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-
+import ProductPage from "../pages/ProductPage";
+import SignInPage from "../pages/SignInPage";
+import SignUpPage from "../pages/SignUpPage";
 import GlobalStyle from "../styles/GlobalStyles";
 import CartPage from "../pages/CartPage";
+import UserContext from "../contexts/UserContext";
 
 const theme = {
   white: "#FFFFFF",
@@ -15,15 +19,41 @@ const theme = {
 };
 
 export default function App() {
+  const [userData, setUserData] = useState(
+    localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user"))
+      : null
+  );
+  const [config, setConfig] = useState(
+    localStorage.getItem("user")
+      ? { headers: { Authorization: `Bearer ${userData.token}` } }
+      : null
+  );
+
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<p>Home Page</p>}></Route>
-          <Route path="/cart" element={<CartPage/>}></Route>
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <UserContext.Provider
+      value={{
+        userData,
+        setUserData,
+        config,
+        setConfig,
+      }}
+    >
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <BrowserRouter>
+          <Routes>
+
+            <Route
+              path="/products/:productId"
+              element={<ProductPage />}
+            ></Route>
+            <Route path="/signin" element={<SignInPage />}></Route>
+            <Route path="/signup" element={<SignUpPage />}></Route>
+            <Route path="/cart" element={<CartPage/>}></Route>
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </UserContext.Provider>
   );
 }
