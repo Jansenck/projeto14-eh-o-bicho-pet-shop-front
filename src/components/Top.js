@@ -1,6 +1,5 @@
 import styled from "styled-components";
 //import { AiOutlineShoppingCart } from "react-icons/fa"
-import { FaBeer } from 'react-icons/fa';
 //import { IoPersonOutline } from 'react-icons/fa';
 import { Link } from "react-router-dom"
 import { useState } from "react";
@@ -60,7 +59,7 @@ const Menu = styled.div`
 const LogoText = styled.h1`
     font-size: 30px;
     color: #FFFFFF;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Kalam', cursive;
 `
 const Icons = styled.div`
     width: 60px;

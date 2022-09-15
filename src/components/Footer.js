@@ -33,7 +33,7 @@ const Container = styled.div`
     align-items: center;
 `
 const Adress = styled.p`
-    width: 120px;
+    width: 33%;
     font-size: 14px;
     color: white;
     text-align: center;
@@ -54,7 +54,7 @@ const Phone = styled.div`
     }
 
     && p {
-        font-size: 14px;
+        font-size: 10px;
     }
 `
 const Social = styled.div`
@@ -63,7 +63,7 @@ const Social = styled.div`
     margin-right: 10px;
 
     && ion-icon {
-        margin-left: 5px;
+        margin-left: 10px;
     }
 `
 const Line = styled.div`
