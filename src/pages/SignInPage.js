@@ -28,11 +28,12 @@ export default function SignInPage() {
 
         try {
             const response = await postSignIn(form)
-            const {token, name} = response.data
-            const {email, password} = form
+            const {token, name, cpf, address} = response.data
+            const {email} = form
+            delete form.password
             
-            localStorage.setItem("user", JSON.stringify({...form, token, name}))
-            setUserData({...userData, email, password, token, name})
+            localStorage.setItem("user", JSON.stringify({...form, token, name, cpf, address}))
+            setUserData({...userData, email, token, name, cpf, address})
             setConfig({...config, 
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -89,5 +90,5 @@ export default function SignInPage() {
 
 const Container = styled.div`
     margin: 60px auto;
-    width: 327px;
+    width: 80vw;
 `

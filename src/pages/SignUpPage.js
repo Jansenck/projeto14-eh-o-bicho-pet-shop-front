@@ -38,7 +38,7 @@ export default function SignUp() {
 
         try {
             await postSignUp(form)
-            navigate("/")
+            navigate("/signin")
 
         } catch (error) {
 
@@ -82,7 +82,7 @@ export default function SignUp() {
                     <Input placeholder = "Email" type = "email" name = "email" required disabled = {disabled} 
                     background = {background} color = {color}
                     onChange = {event => handleForm({name: event.target.name, value: event.target.value}, form, setForm)}/>
-                    <Input placeholder = "Endereço" type = "text" name = "adress" required disabled = {disabled} 
+                    <Input placeholder = "Endereço" type = "text" name = "address" required disabled = {disabled} 
                     background = {background} color = {color}
                     onChange = {event => handleForm({name: event.target.name, value: event.target.value}, form, setForm)}/>
                     <Input placeholder = "Cpf (somente números)" type = "text" name = "cpf" required disabled = {disabled} 
@@ -106,5 +106,5 @@ export default function SignUp() {
 
 const Container = styled.div`
     margin: 80px auto;
-    width: 327px;
+    width: 80vw;
 `

@@ -5,7 +5,7 @@ function Card({type, route, source}) {
 
     return (
         <Box>
-            <img src = {source} width = {250}/>
+            <img src = {source} />
             <h2>{type}</h2>
             <Link to = {`${route}`}>
                 <Shop>
@@ -38,7 +38,7 @@ const Container = styled.div`
     align-items: center;
 `
 const Box = styled.div`
-    width: 100%;
+    width: 80vw;
     height: 150px;
     margin: 10px 0;
     background-color: rgba(0,0,0,0.1);
