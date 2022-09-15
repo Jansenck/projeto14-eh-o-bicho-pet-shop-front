@@ -42,6 +42,7 @@ export default function App() {
         <GlobalStyle />
         <BrowserRouter>
           <Routes>
+
             <Route
               path="/products/:productId"
               element={<ProductPage />}
