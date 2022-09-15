@@ -14,18 +14,21 @@ export default function HomePage () {
                         <h2>CÃES</h2>
                         <Shop>
                             <p>SHOP</p>
+                            <ion-icon name="chevron-forward-outline"></ion-icon>
                         </Shop>
                     </Box>
                     <Box>
                         <h2>GATOS</h2>
                         <Shop>
                             <p>SHOP</p>
+                            <ion-icon name="chevron-forward-outline"></ion-icon>
                         </Shop>
                     </Box>
                     <Box>
                         <h2>COELHOS</h2>
                         <Shop>
                             <p>SHOP</p>
+                            <ion-icon name="chevron-forward-outline"></ion-icon>
                         </Shop>
                     </Box>
                 </Sessions>
@@ -35,9 +38,10 @@ export default function HomePage () {
 }
 
 const Container = styled.div`
+    margin-top: 80px;
 `
 const Sessions = styled.div`
-    margin: 80px auto;
+    margin: 0px auto;
     width: 80vw;
     height: 600px;
     display: flex;
@@ -55,17 +59,26 @@ const Box = styled.div`
 
     && h2 {
         margin-top: 90px;
+        margin-bottom: 10px;
         font-family: Arial, Helvetica, sans-serif;
         color: #02c39a;
     }
     
     && p {
-        margin-top: 20px;
         font-family: Arial, Helvetica, sans-serif;
         font-size: 12px;
         color: grey;
     }
 `
 const Shop = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60px;
+    margin: 0 auto;
 
+    && ion-icon {
+        font-size: 12px;
+        color: orange;
+    }
 `
