@@ -20,7 +20,7 @@ export default function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
-          <Route path="/product" element={<ProductPage />}></Route>
+          <Route path="/products/:productId" element={<ProductPage />}></Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
