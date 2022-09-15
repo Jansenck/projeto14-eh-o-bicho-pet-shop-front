@@ -42,7 +42,11 @@ export default function App() {
         <GlobalStyle />
         <BrowserRouter>
           <Routes>
-            <Route path="/product/:productId" element={<ProductPage />}></Route>
+
+            <Route
+              path="/products/:productId"
+              element={<ProductPage />}
+            ></Route>
             <Route path="/signin" element={<SignInPage />}></Route>
             <Route path="/signup" element={<SignUpPage />}></Route>
           </Routes>
