@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Top from "../components/Top";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Footer from "../components/Footer";
 
 export default function HomePage () {
 
@@ -33,12 +34,14 @@ export default function HomePage () {
                     </Box>
                 </Sessions>
             </Container>
+            <Footer/>
         </>
     )
 }
 
 const Container = styled.div`
     margin-top: 80px;
+    margin-bottom: 80px;
 `
 const Sessions = styled.div`
     margin: 0px auto;
