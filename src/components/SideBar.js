@@ -1,6 +1,17 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom"
 
+function Session ({route, classCss, type}) {
+
+    return (
+        <Link to = {route}>
+            <div className = {classCss}>
+                <p>{type}</p>
+            </div>
+        </Link>
+    )
+}
+
 
 export default function SideBar({display, animation, setAnimation, animation2, setAnimation2, setDisplay }) {
 
@@ -13,24 +24,14 @@ export default function SideBar({display, animation, setAnimation, animation2, s
     return (
         <>
             <MenuBar show = {display} animation = {animation}>
-                <ion-icon name="close-outline" onClick = {reverseAnimation}></ion-icon>
+                <Close>
+                    <ion-icon name="close-circle-sharp" onClick = {reverseAnimation}></ion-icon>
+                </Close>
                 <List>
                     <TextList>
-                        <Link to = {"/dogs"}>
-                            <div>
-                                <p>Cães</p>
-                            </div>
-                        </Link>
-                        <Link to = {"/cats"}>
-                            <div>
-                                <p>Gatos</p>
-                            </div>
-                        </Link>
-                        <Link to = {"/fish"}>
-                            <div className="last">
-                                <p>Peixes</p>
-                            </div>
-                        </Link>
+                        <Session route = {"/dogs"} type = {"Cães"} classCss = {""}/>
+                        <Session route = {"/cats"} type = {"Gatos"} classCss = {""}/>
+                        <Session route = {"/fish"} type = {"Peixes"} classCss = {"last"}/>
                         </TextList>
                     <IconsList>
                         <Link to = {"/cart"}><ion-icon name="cart-outline"></ion-icon> </Link>
@@ -75,6 +76,10 @@ const MenuBar = styled.div`
             margin-left: -1000px;
         }
     }
+`
+const Close = styled.div`
+    font-size: 20px;
+    margin: 10px;
 `
 const List = styled.div`
     margin-top: 40px;
