@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 import styled from "styled-components";
 import { AiOutlineStar, AiFillHeart } from "react-icons/ai";
+import UserContext from "../../contexts/UserContext";
+import { deleteFavoriteProduct } from "../../services/api";
 
 export default function FavoriteProducts(){
 
+    const { config } = useContext(UserContext);
+    
     const products = [{
         title: "Biscoito Petz Clássico para Cães Adultos",
         price: "16.99",
@@ -34,6 +39,19 @@ export default function FavoriteProducts(){
         );
     }
     
+    function deleteFavoriteProducts(title){
+
+        const body = {title: title};
+
+        try {
+            console.log(body)
+            deleteFavoriteProduct(config, body);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return(
         <Container numberFavoriteProducts={products.length}>
             {
@@ -60,12 +78,12 @@ export default function FavoriteProducts(){
                                             <h1>R$ {price.replace(".", ",")}</h1>
                                             <Installment>
                                                 <InstallmentPrice price={price} />
-                                                <FavoriteButton>
-                                                    <AiFillHeart/>
-                                                </FavoriteButton>
                                             </Installment>
                                         </ProductInfos>
                                     </Link>
+                                    <FavoriteButton onClick={() => deleteFavoriteProducts(title)}>
+                                        <AiFillHeart/>
+                                    </FavoriteButton>
                                 </Product>
                             );
                         })
@@ -100,6 +118,7 @@ const Product = styled.div`
     display: flex;
     justify-content: center;
     aping-items: center;
+    position: relative;
     a{
         display: grid;
         grid-template-columns: 2fr 3fr;
@@ -109,6 +128,7 @@ const Product = styled.div`
         max-width: 590px;
         padding: 5%;
         border-bottom: 1px solid rgba(9,9,9,0.15);
+        z-index: 0;
     }
 
 `;
@@ -132,7 +152,7 @@ const ProductInfos = styled.div`
     align-items: center;
     text-align: left;
         h1{
-            font-size: 20px;
+            font-size: 21px;
             font-weight: 700;
             color: ${(props) => props.theme.darkblue}
         }
@@ -154,20 +174,27 @@ const Installment = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: left;
     align-items: center;
-    svg{
-        color: ${(props) => props.theme.darkblue};
-    }
+    
 `;
 const FavoriteButton = styled.div`
-    height: 25px;
-    width: 25px;
+    height: 24px;
+    width: 24px;
     border-radius: 100%;
-    box-shadow: 0 3px 8px rgba(0,0,0, 0.12);
+    box-shadow: 0 3px 8px rgba(0,0,0, 0.18);
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    bottom: 26%;
+    right: 12%;
+    cursor: pointer;
+    svg{
+        color: ${(props) => props.theme.lightblue};
+        font-size: 16px;
+    }
 `;
 
 const EmptyCart = styled.div`
