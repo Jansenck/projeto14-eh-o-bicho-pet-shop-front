@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import UserContext from "../contexts/UserContext";
-import { getSingleProduct, postProductCart } from "../services/api";
+import { getSingleProduct, postAddtoCart } from "../services/api";
 import { Button } from "../styles/SignIn&UpStyles";
 import { TiHeartFullOutline } from "react-icons/ti";
 
@@ -25,7 +25,7 @@ export default function SingleProductPage() {
     e.preventDefault();
 
     try {
-      await postProductCart(productId, config);
+      await postAddtoCart(productId, config);
       alert("Produto adicionado ao carrinho com sucesso!");
     } catch (err) {
       const status = err.response.status;

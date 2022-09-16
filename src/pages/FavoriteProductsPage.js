@@ -1,16 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
-import Cart from "../components/cart/Cart";
+import FavoriteProducts from "../components/favorites/FavoriteProducts";
 
-export default function CartPage(){
+export default function FavoriteProductsPage(){
+
+    const navigate = useNavigate();
 
     return(
         <>
             <ComeBackHeader>
-                <MdOutlineArrowBackIosNew/>
+                <MdOutlineArrowBackIosNew onClick={() => navigate("/products")}/>
                 <h2>Meus Favoritos</h2>
             </ComeBackHeader>
-            <Cart/>
+            <FavoriteProducts/>
         </>
     );
 }
@@ -21,7 +24,7 @@ const ComeBackHeader  = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 3;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,6 +35,7 @@ const ComeBackHeader  = styled.div`
         left: 5vw;
         top: auto;
         font-size: 25px;
+        cursor: pointer;
     }
     h2{
         font-size: 18px;

@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import SignInPage from "../pages/SignInPage";
 import SignUpPage from "../pages/SignUpPage";
+import FavoriteProductsPage from "../pages/FavoriteProductsPage";
 import GlobalStyle from "../styles/GlobalStyles";
-import CartPage from "../pages/CartPage";
 import UserContext from "../contexts/UserContext";
 import SingleProductPage from "../pages/SingleProductPage";
 import ProductsPage from "../pages/ProductsPage";
@@ -52,7 +52,7 @@ export default function App() {
               path="/products/:productId"
               element={<SingleProductPage />}
             ></Route>
-            <Route path="/cart" element={<CartPage />}></Route>
+            <Route path="/favorites" element={<FavoriteProductsPage />}></Route>
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
