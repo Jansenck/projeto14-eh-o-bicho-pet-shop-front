@@ -2,18 +2,24 @@ import styled from "styled-components";
 import { Link } from "react-router-dom"
 
 
-export default function SideBar({display, setDisplay, showMenu}) {
+export default function SideBar({display, animation, setAnimation, animation2, setAnimation2, setDisplay }) {
+
+    function reverseAnimation () {
+        setAnimation("animation-reverse 0.5s")
+        setAnimation2("animation2-reverse 0.5s")
+        setTimeout(() => setDisplay("none"), 500)
+    }
 
     return (
         <>
-            <MenuBar show = {display}>
-                <ion-icon name="close-outline" onClick = {showMenu}></ion-icon>
+            <MenuBar show = {display} animation = {animation}>
+                <ion-icon name="close-outline" onClick = {reverseAnimation}></ion-icon>
                 <List>
                     <TextList>
                         <Link to = {"/dogs"}>
-                        <div>
-                            <p>Cães</p>
-                        </div>
+                            <div>
+                                <p>Cães</p>
+                            </div>
                         </Link>
                         <Link to = {"/cats"}>
                             <div>
@@ -32,7 +38,7 @@ export default function SideBar({display, setDisplay, showMenu}) {
                     </IconsList>
                 </List>
             </MenuBar>
-            <HalfScreen show = {display} onClick = {showMenu}/>
+            <HalfScreen show = {display} onClick = {reverseAnimation} animation2 = {animation2}/>
         </>
     )
 }
@@ -50,6 +56,25 @@ const MenuBar = styled.div`
     text-align: left;
     opacity: 0.8;
     top: 0;
+    animation: ${props => props.animation};
+
+    @keyframes animation {
+        from {
+            margin-left: -1000px;
+        }
+        to {
+            margin-left: 0px;
+        }
+    }
+
+    @keyframes animation-reverse {
+        from {
+            margin-left: 0px;
+        }
+        to {
+            margin-left: -1000px;
+        }
+    }
 `
 const List = styled.div`
     margin-top: 40px;
@@ -99,4 +124,23 @@ const HalfScreen = styled.div`
     height: 100vh;
     right: 0;
     top:0;
+    animation: ${props => props.animation2};
+
+    @keyframes animation2 {
+        from {
+            margin-right: -1000px;
+        }
+        to {
+            margin-right: 0px;
+        }
+    }
+
+    @keyframes animation2-reverse {
+        from {
+            margin-right: 0;
+        }
+        to {
+            margin-right: -1000px;
+        }
+    }
 `

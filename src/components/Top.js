@@ -8,9 +8,13 @@ import SideBar from "../components/SideBar.js";
 export default function Top () {
 
     const [display, setDisplay] = useState("none")
+    const [animation, setAnimation] = useState("none")
+    const [animation2, setAnimation2] = useState("none")
 
     function showMenu() {
-        display === "none" ? setDisplay("flex") : setDisplay("none")
+        setDisplay("flex") 
+        setAnimation("animation 0.5s")
+        setAnimation2("animation2 0.5s")
     }
 
     return (
@@ -31,7 +35,8 @@ export default function Top () {
                     </Link>
                 </Icons>
             </Container>
-            {display === "none" ? "" : <SideBar display = {display} setDisplay = {setDisplay} showMenu = {showMenu}/>}
+            {display === "none" ? "" : <SideBar display = {display} setDisplay = {setDisplay} 
+            animation = {animation} setAnimation = {setAnimation} animation2 = {animation2} setAnimation2 = {setAnimation2}/>}
         </>
     )
 }
