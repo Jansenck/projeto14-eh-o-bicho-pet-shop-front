@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlineStar, AiFillHeart } from "react-icons/ai";
 
-export default function Cart(){
+export default function FavoriteProducts(){
 
     const products = [{
         title: "Biscoito Petz Clássico para Cães Adultos",
@@ -25,8 +25,9 @@ export default function Cart(){
         category: "dog"
     }];
 
-    function InstallmentPrice({price}){
-        let installment = (price/3).toFixed(2); 
+    function InstallmentPrice(price){
+        const productPrice = price?.price;
+        let installment = (productPrice/3).toFixed(2); 
         installment = installment.replace(".", ",");
         return(
             <h2>em até <span>3x</span> de R${installment}</h2>
@@ -34,10 +35,10 @@ export default function Cart(){
     }
     
     return(
-        <Container numberItemsInCart={products.length}>
+        <Container numberFavoriteProducts={products.length}>
             {
                 products?
-                <ProductsInCart>
+                <Favorite>
                     {
                         products.map((product, index) => {
                             const { title, price, image } = product;
@@ -69,7 +70,7 @@ export default function Cart(){
                             );
                         })
                     }
-                </ProductsInCart>
+                </Favorite>
                 :
                 <EmptyCart>
                     <NoticeMessage>
@@ -86,9 +87,9 @@ export default function Cart(){
 const Container = styled.div`
     margin: 10vh 0;
     display: grid;
-    grid-template-row: repeat(${(props) => props.numberItemsInCart}, 1fr);
+    grid-template-row: repeat(${(props) => props.numberFavoriteProducts}, 1fr);
 `;
-const ProductsInCart = styled.div`
+const Favorite = styled.div`
 
     display: grid;
     grid-template-columns: repeat(1, 1fr);

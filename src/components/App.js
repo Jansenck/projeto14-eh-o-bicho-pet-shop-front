@@ -5,7 +5,7 @@ import ProductPage from "../pages/ProductPage";
 import SignInPage from "../pages/SignInPage";
 import SignUpPage from "../pages/SignUpPage";
 import GlobalStyle from "../styles/GlobalStyles";
-import CartPage from "../pages/CartPage";
+import FavoriteProducts from "./favorites/FavoriteProducts";
 import UserContext from "../contexts/UserContext";
 
 const theme = {
@@ -50,7 +50,7 @@ export default function App() {
             ></Route>
             <Route path="/signin" element={<SignInPage />}></Route>
             <Route path="/signup" element={<SignUpPage />}></Route>
-            <Route path="/cart" element={<CartPage/>}></Route>
+            <Route path="/favorites" element={<FavoriteProducts/>}></Route>
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
