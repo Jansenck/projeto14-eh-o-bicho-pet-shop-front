@@ -28,7 +28,6 @@ function selectProduct(productId, config) {
 }
 
 function deleteFavoriteProduct(config, body){
-  console.log("BODY: ", body)
   return axios.delete(`${BASE_URL}/favorites`, config);
 }
 

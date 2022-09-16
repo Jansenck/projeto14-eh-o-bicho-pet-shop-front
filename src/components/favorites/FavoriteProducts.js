@@ -44,7 +44,6 @@ export default function FavoriteProducts(){
         const body = {title: title};
 
         try {
-            console.log(body)
             deleteFavoriteProduct(config, body);
 
         } catch (error) {
