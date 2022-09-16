@@ -19,12 +19,23 @@ function handleForm({ name, value }, form, setForm) {
   });
 }
 
+function getProducts() {
+  return axios.get(`${BASE_URL}/products`);
+}
+
 function getSingleProduct(productId) {
   return axios.get(`${BASE_URL}/products/${productId}`);
 }
 
-function selectProduct(productId, config) {
-  return axios.post(`${BASE_URL}/products/${productId}`, {}, config);
+function postProductCart(productId, config) {
+  return axios.post(`${BASE_URL}/products/${productId}/addtocart`, {}, config);
 }
 
-export { postSignIn, postSignUp, handleForm, getSingleProduct, selectProduct };
+export {
+  postSignIn,
+  postSignUp,
+  handleForm,
+  getProducts,
+  getSingleProduct,
+  postProductCart,
+};
