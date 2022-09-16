@@ -27,4 +27,8 @@ function selectProduct(productId, config) {
   return axios.post(`${BASE_URL}/products/${productId}`, {}, config);
 }
 
-export { postSignIn, postSignUp, handleForm, getSingleProduct, selectProduct };
+function deleteFavoriteProduct(config, body){
+  return axios.delete(`${BASE_URL}/favorites`, config);
+}
+
+export { postSignIn, postSignUp, handleForm, getSingleProduct, selectProduct, deleteFavoriteProduct };
