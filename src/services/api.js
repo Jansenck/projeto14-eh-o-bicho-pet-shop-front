@@ -19,16 +19,28 @@ function handleForm({ name, value }, form, setForm) {
   });
 }
 
+function getProducts() {
+  return axios.get(`${BASE_URL}/products`);
+}
+
 function getSingleProduct(productId) {
   return axios.get(`${BASE_URL}/products/${productId}`);
 }
 
-function selectProduct(productId, config) {
-  return axios.post(`${BASE_URL}/products/${productId}`, {}, config);
+function postAddtoCart(productId, config) {
+  return axios.post(`${BASE_URL}/products/${productId}/addtocart`, {}, config);
 }
 
-function deleteFavoriteProduct(config, body){
+function deleteFavoriteProduct(config, body) {
   return axios.delete(`${BASE_URL}/favorites`, config);
 }
 
-export { postSignIn, postSignUp, handleForm, getSingleProduct, selectProduct, deleteFavoriteProduct };
+export {
+  postSignIn,
+  postSignUp,
+  handleForm,
+  getProducts,
+  getSingleProduct,
+  postAddtoCart,
+  deleteFavoriteProduct,
+};
