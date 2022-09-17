@@ -7,12 +7,23 @@ import { Input, Button, Text } from "../styles/SignIn&UpStyles";
 import Logo from "../components/Logo";
 
 export default function SignUp() {
+
   const [form, setForm] = useState({});
-  const navigate = useNavigate();
   const [load, setLoad] = useState("Cadastrar");
   const [disabled, setDisabled] = useState("");
   const [background, setBackground] = useState("#FFFFFF");
   const [color, setColor] = useState("#02c39a");
+  const captureForm = (event) => handleForm({ name: event.target.name, value: event.target.value },form,setForm);
+  const navigate = useNavigate();
+
+  const inputData = [
+    {placeholder: "Nome", type: "text", name: "name", functionForm:  captureForm},
+    {placeholder: "Email", type: "email", name: "email", functionForm:  captureForm},
+    {placeholder: "Endereço", type: "text", name: "address", functionForm:  captureForm},
+    {placeholder: "CPF (Somente números)", type: "text", name: "cpf", functionForm:  captureForm},
+    {placeholder: "Senha", type: "password", name: "password", functionForm:  captureForm},
+    {placeholder: "Confirme sua senha", type: "password", name: "confirmPassword", functionForm:  captureForm}
+  ]
 
   async function userRegistration(event) {
     event.preventDefault();
@@ -73,102 +84,8 @@ export default function SignUp() {
       <Logo />
       <Container>
         <form onSubmit={userRegistration}>
-          <Input
-            placeholder="Nome"
-            type="text"
-            name="name"
-            required
-            disabled={disabled}
-            background={background}
-            color={color}
-            onChange={(event) =>
-              handleForm(
-                { name: event.target.name, value: event.target.value },
-                form,
-                setForm
-              )
-            }
-          />
-          <Input
-            placeholder="Email"
-            type="email"
-            name="email"
-            required
-            disabled={disabled}
-            background={background}
-            color={color}
-            onChange={(event) =>
-              handleForm(
-                { name: event.target.name, value: event.target.value },
-                form,
-                setForm
-              )
-            }
-          />
-          <Input
-            placeholder="Endereço"
-            type="text"
-            name="address"
-            required
-            disabled={disabled}
-            background={background}
-            color={color}
-            onChange={(event) =>
-              handleForm(
-                { name: event.target.name, value: event.target.value },
-                form,
-                setForm
-              )
-            }
-          />
-          <Input
-            placeholder="Cpf (somente números)"
-            type="text"
-            name="cpf"
-            required
-            disabled={disabled}
-            background={background}
-            color={color}
-            onChange={(event) =>
-              handleForm(
-                { name: event.target.name, value: event.target.value },
-                form,
-                setForm
-              )
-            }
-          />
-          <Input
-            placeholder="Senha"
-            type="password"
-            name="password"
-            required
-            disabled={disabled}
-            background={background}
-            color={color}
-            onChange={(event) =>
-              handleForm(
-                { name: event.target.name, value: event.target.value },
-                form,
-                setForm
-              )
-            }
-          />
-          <Input
-            placeholder="Confirme a senha"
-            type="password"
-            name="confirmPassword"
-            required
-            disabled={disabled}
-            background={background}
-            color={color}
-            onChange={(event) =>
-              handleForm(
-                { name: event.target.name, value: event.target.value },
-                form,
-                setForm
-              )
-            }
-          />
+          {inputData.map((value, index) => <Input key = {index} placeholder = {value.placeholder} type = {value.type} name = {value.name}
+          disabled = {disabled} background = {background} color = {color} onChange = {value.functionForm}/>)}
           <Button type="submit" disabled={disabled}>
             {load}
           </Button>
