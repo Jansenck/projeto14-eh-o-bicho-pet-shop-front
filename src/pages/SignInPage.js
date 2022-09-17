@@ -37,7 +37,7 @@ export default function SignInPage() {
         },
       });
 
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       const status = error.response.status;
       enabledForm();
