@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
-import FavoriteProducts from "../components/favorites/FavoriteProducts";
+import styled from "styled-components";
+import Cart from "../components/cart/Cart";
 
-export default function FavoriteProductsPage(){
+export default function CartPage(){
 
     const navigate = useNavigate();
 
@@ -11,9 +11,9 @@ export default function FavoriteProductsPage(){
         <>
             <ComeBackHeader>
                 <MdOutlineArrowBackIosNew onClick={() => navigate("/products")}/>
-                <h2>Meus Favoritos</h2>
+                <h2>Carrinho</h2>
             </ComeBackHeader>
-            <FavoriteProducts/>
+            <Cart/>
         </>
     );
 }
