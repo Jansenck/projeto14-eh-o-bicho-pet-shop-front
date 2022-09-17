@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import SignInPage from "../pages/SignInPage";
-import SignUpPage from "../pages/SignUpPage";
-import FavoriteProductsPage from "../pages/FavoriteProductsPage";
 import GlobalStyle from "../styles/GlobalStyles";
 import UserContext from "../contexts/UserContext";
-import SingleProductPage from "../pages/SingleProductPage";
-import ProductsPage from "../pages/ProductsPage";
+
 import HomePage from "../pages/HomePage";
+import SignInPage from "../pages/SignInPage";
+import SignUpPage from "../pages/SignUpPage";
+import ProductsPage from "../pages/ProductsPage";
+import ProductDetails from "../pages/ProductDetails";
+import FavoriteProductsPage from "../pages/FavoriteProductsPage";
 
 const theme = {
   white: "#FFFFFF",
@@ -52,7 +53,7 @@ export default function App() {
             <Route path="/products" element={<ProductsPage />}></Route>
             <Route
               path="/products/:productId"
-              element={<SingleProductPage />}
+              element={<ProductDetails />}
             ></Route>
             <Route path="/favorites" element={<FavoriteProductsPage />}></Route>
           </Routes>

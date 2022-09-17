@@ -1,39 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { getProducts } from "../services/api";
-
-// const products = [
-//   {
-//     title:
-//       "Snacks Petz Assados Ômega 3 para Cães Adultos Sabor Salmão e Romã 150g",
-//     price: 10.49,
-//     description:
-//       " Indicado para cães; Sabor de salmão e romã; Snacks integral; Com prebióticos; Antioxidantes naturais; Fonte de ômega 3; Livre de transgênicos; Alimentos para cães adultos; Disponível em embalagem de 150g.",
-//     image: "https://static.petz.com.br/fotos/1628688839662.jpg",
-//     category: "dog",
-//   },
-//   {
-//     title: "Ração Royal Canin Maxi",
-//     subtitle: "Para Cães Adultos de Porte Grande 15kg",
-//     price: 391.59,
-//     description:
-//       " Indicada para cães; Ideal para pets de grande porte; Oferece todos nutrientes necessários para uma vida saudável; Proporciona maior aporte para os ossos e articulações; Contém fórmula enriquecida com ômega 3, Disponível em embalagem de 15 kg.",
-//     image: "https://static.petz.com.br/fotos/1660162896325.jpg",
-//     category: "dog",
-//   },
-//   {
-//     title: "Poste Arranhador Petz para Gatos - Cores Sortidas",
-//     price: 99.99,
-//     description:
-//       " Indicado para gatos; Madeira de excelente qualidade; Encapado com pelúcia; Sisal e uma corda com uma bolinha para uma melhor distração e divertimento do seu pet; Ideal para distrair, interagir, brincar, arranhar e combater o stress do seu felino; Proporciona o desgaste natural das garras do gato; Horas de diversão, interação para seu gato; Divertido até mesmo quando ele estiver sozinho; Evita que ele arranhe ou estrague seus móveis ou objetos de sua casa, Disponível em embalagem com 1 unidade.",
-//     image: "https://static.petz.com.br/fotos/1608212202034.jpg",
-//     category: "cat",
-//   },
-// ];
+import styled from "styled-components";
+import Footer from "../components/Footer";
+import Top from "../components/Top";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const promise = getProducts();
@@ -45,17 +19,30 @@ export default function ProductsPage() {
 
   return (
     <>
-      {/* TODO:Alterar o Header */}
-      <Header>Aqui vai o Header (comum a todas as páginas)</Header>
+      <Top />
+      <Banner>
+        <img
+          src="https://images2.imgbox.com/d4/70/JcaMrf3Q_o.png"
+          alt="Setembro Vermelho"
+        />
+      </Banner>
+      <Menu>
+        <h1>CÃES</h1> <h1>GATOS</h1> <h1>PEIXES</h1>
+      </Menu>
 
       {products.length === 0 ? (
         ""
       ) : (
         <ContentWrapper>
           {products.map((product) => (
-            <ProductsWrapper>
-              <ProductTitle>{product.title}</ProductTitle>
+            <ProductsWrapper
+              onClick={() => {
+                navigate(`/products/${product._id}`);
+              }}
+            >
               <img src={product.image} alt={product.title} />
+              <ProductTitle>{product.title}</ProductTitle>
+
               <Price>
                 <span>R$ {product.price?.toFixed(2).replace(".", ",")}</span>
               </Price>
@@ -63,25 +50,29 @@ export default function ProductsPage() {
           ))}
         </ContentWrapper>
       )}
-
-      {/* TODO:Alterar o Footer */}
-      <Footer>Aqui vai o Footer (comum a todas as páginas)</Footer>
+      <Footer />
     </>
   );
 }
 
 const ProductsWrapper = styled.div`
-  width: 100px;
-  height: 100px;
-  background-color: purple;
-  margin: 50px;
+  margin: 0 20px 10px;
+  width: 120px;
+  height: 185px;
+  padding: 10px 0 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const ContentWrapper = styled.div`
-  background-color: green;
-  margin: 100px 10px 10px 25px;
+  margin: 30px 20px 150px;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
 
   img {
     width: 100px;
@@ -90,14 +81,16 @@ const ContentWrapper = styled.div`
 `;
 
 const ProductTitle = styled.h6`
-  text-align: justify;
+  height: 33px;
+  text-align: center;
   color: ${(props) => props.theme.black};
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Price = styled.h4`
-  margin: 0 30px 40px 0;
   font-family: "Raleway", sans-serif;
-  font-size: 25px;
+  font-size: 15px;
   font-weight: 700;
   color: ${(props) => props.theme.darkblue};
   display: flex;
@@ -105,30 +98,20 @@ const Price = styled.h4`
   justify-content: space-between;
 `;
 
-const Header = styled.header`
-  height: 80px;
-  width: 100vw;
-  padding: 20px;
-  color: ${(props) => props.theme.lightyellow};
-  background-color: ${(props) => props.theme.darkblue};
-  position: fixed;
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+const Banner = styled.div`
+  margin-top: 85px;
+  box-shadow: 8px 2px 4px 2px rgba(0, 0, 0, 0.1);
+  img {
+    width: 100vw;
+  }
 `;
 
-const Footer = styled.footer`
-  height: 100px;
-  width: 100vw;
-  padding: 20px;
-  color: ${(props) => props.theme.black};
+const Menu = styled.div`
+  height: 40px;
   background-color: ${(props) => props.theme.lightyellow};
-  position: fixed;
-  bottom: 0;
+  color: ${(props) => props.theme.darkblue};
+  font-weight: 700;
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
-  justify-content: center;
-  text-align: center;
 `;
