@@ -7,25 +7,22 @@ import Highlights from "../components/Highlights";
 import Sessions from "../components/Sessions";
 import About from "../components/About";
 
-
-
-export default function HomePage () {
-
-    return (
-        <>
-            <Top/>
-            <Container>
-                <About/>
-                <Highlights/>
-                <Sessions/>
-                <Highlights/>
-            </Container>
-            <Footer/>
-        </>
-    )
+export default function HomePage() {
+  return (
+    <>
+      <Top />
+      <Container>
+        <About />
+        <Highlights />
+        <Sessions />
+        <Highlights />
+      </Container>
+      <Footer />
+    </>
+  );
 }
 
 const Container = styled.div`
-    margin-top: 120px;
-    margin-bottom: 120px;
-`
+  margin-top: 120px;
+  margin-bottom: 120px;
+`;

@@ -1,12 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import styled from "styled-components";
-import UserContext from "../contexts/UserContext";
 import { getSingleProduct, postAddtoCart } from "../services/api";
+import UserContext from "../contexts/UserContext";
+import styled from "styled-components";
 import { Button } from "../styles/SignIn&UpStyles";
+import Footer from "../components/Footer";
+import Top from "../components/Top";
 import { TiHeartFullOutline } from "react-icons/ti";
 
-export default function SingleProductPage() {
+export default function ProductDetails() {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
   const navigate = useNavigate();
@@ -39,9 +41,7 @@ export default function SingleProductPage() {
 
   return (
     <div>
-      {/* TODO:Alterar o Header */}
-      <Header>Aqui vai o Header (comum a todas as páginas)</Header>
-
+      <Top />
       <ContentWrapper>
         <ProductTitle>{product.title}</ProductTitle>
         <img src={product.image} alt={product.title} />
@@ -62,9 +62,7 @@ export default function SingleProductPage() {
           </h2>
         </Description>
       </ContentWrapper>
-
-      {/* TODO:Alterar o Footer */}
-      <Footer>Aqui vai o Footer (comum a todas as páginas)</Footer>
+      <Footer />
     </div>
   );
 }
@@ -119,34 +117,6 @@ const BuyButton = styled(Button)`
   width: 70%;
   margin: 20px auto;
   display: block;
-`;
-
-const Header = styled.header`
-  height: 80px;
-  width: 100vw;
-  padding: 20px;
-  color: ${(props) => props.theme.lightyellow};
-  background-color: ${(props) => props.theme.darkblue};
-  position: fixed;
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-`;
-
-const Footer = styled.footer`
-  height: 100px;
-  width: 100vw;
-  padding: 20px;
-  color: ${(props) => props.theme.black};
-  background-color: ${(props) => props.theme.lightyellow};
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 `;
 
 const ContentWrapper = styled.div`
