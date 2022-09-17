@@ -27,6 +27,7 @@ export default function SignInPage() {
       const response = await postSignIn(form);
       const { token, name, address, cpf} = response.data;
       const { email } = form;
+      delete form.password
 
       localStorage.setItem("user", JSON.stringify({ ...form, token, name , address, cpf}));
       setUserData({ ...userData, email, token, name, address, cpf });
