@@ -36,7 +36,7 @@ export default function SignUp() {
 
     try {
       await postSignUp(form);
-      navigate("/");
+      navigate("/signin");
     } catch (error) {
       enabledForm();
       const status = error.response.status;
