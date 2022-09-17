@@ -4,17 +4,23 @@ import styled from "styled-components";
 import { Link } from "react-router-dom"
 import { useState } from "react";
 import SideBar from "../components/SideBar.js";
+import LogOut from "./LogOut.js";
 
 export default function Top () {
 
     const [display, setDisplay] = useState("none")
     const [animation, setAnimation] = useState("none")
     const [animation2, setAnimation2] = useState("none")
-
+    const [displayLogOut, setDisplayLogOut] = useState("none")
+    
     function showMenu() {
         setDisplay("flex") 
         setAnimation("animation 0.5s")
         setAnimation2("animation2 0.5s")
+    }
+
+    function showLogOut() {
+        displayLogOut === "none" ? setDisplayLogOut("flex") : setDisplayLogOut("none")
     }
 
     return (
@@ -27,12 +33,11 @@ export default function Top () {
                     É o bicho!
                 </LogoText>
                 <Icons>
+                    <ion-icon name="person-outline" onClick = {showLogOut}></ion-icon>
                     <Link to = {"/cart"}>
                         <ion-icon name="cart-outline"></ion-icon> 
                     </Link>
-                    <Link to = {"/signin"}>
-                        <ion-icon name="person-outline"></ion-icon>
-                    </Link>
+                    <LogOut displayLogOut = {displayLogOut} setDisplayLogOut = {setDisplayLogOut}/>
                 </Icons>
             </Container>
             {display === "none" ? "" : <SideBar display = {display} setDisplay = {setDisplay} 
@@ -73,6 +78,7 @@ const Icons = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-right: 10px;
+    position: relative;
 
     && ion-icon {
         font-size: 24px;
