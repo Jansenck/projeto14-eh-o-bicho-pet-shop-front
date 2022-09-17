@@ -8,6 +8,7 @@ import GlobalStyle from "../styles/GlobalStyles";
 import UserContext from "../contexts/UserContext";
 import SingleProductPage from "../pages/SingleProductPage";
 import ProductsPage from "../pages/ProductsPage";
+import HomePage from "../pages/HomePage";
 
 const theme = {
   white: "#FFFFFF",
@@ -45,6 +46,7 @@ export default function App() {
         <GlobalStyle />
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<HomePage />}></Route>
             <Route path="/signin" element={<SignInPage />}></Route>
             <Route path="/signup" element={<SignUpPage />}></Route>
             <Route path="/products" element={<ProductsPage />}></Route>
