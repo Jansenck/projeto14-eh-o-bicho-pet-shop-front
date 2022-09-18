@@ -9,6 +9,7 @@ import SignInPage from "../pages/SignInPage";
 import SignUpPage from "../pages/SignUpPage";
 import ProductsPage from "../pages/ProductsPage";
 import ProductDetails from "../pages/ProductDetails";
+import CartPage from "../pages/CartPage";
 import FavoriteProductsPage from "../pages/FavoriteProductsPage";
 
 const theme = {
@@ -50,12 +51,13 @@ export default function App() {
             <Route path="/" element={<HomePage />}></Route>
             <Route path="/signin" element={<SignInPage />}></Route>
             <Route path="/signup" element={<SignUpPage />}></Route>
+            <Route path="/favorites" element={<FavoriteProductsPage/>}></Route>
+            <Route path="/cart" element={<CartPage/>}></Route>
             <Route path="/products" element={<ProductsPage />}></Route>
             <Route
               path="/products/:productId"
               element={<ProductDetails />}
             ></Route>
-            <Route path="/favorites" element={<FavoriteProductsPage />}></Route>
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
