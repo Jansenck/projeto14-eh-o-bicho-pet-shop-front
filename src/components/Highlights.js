@@ -1,23 +1,27 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function Highlights() {
+export default function Highlights({image, title, description, id}) {
+
+  const navigate = useNavigate()
+
   return (
     <Container>
       <Favorite>
         <img
-          src="https://static.petz.com.br/fotos/1660162942086.jpg"
+          src={image}
           width={200}
           height={200}
           alt="products"
         />
-        <h2>RAÇÃO PREMIUM</h2>
+        <h2>{title}</h2>
         <Description>
           <p>
-            Ração de alta qualidade nutritiva. Rica em ômega 3 e ferro para o
-            seu cão.
+            {description}
           </p>
         </Description>
-        <Button>Ver produto</Button>
+        <Button onClick={() => {navigate(`/products/${id}`)}}>Ver produto</Button>
       </Favorite>
     </Container>
   );

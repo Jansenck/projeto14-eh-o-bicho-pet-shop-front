@@ -1,16 +1,21 @@
 import styled from "styled-components";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import UserContext from "../contexts/UserContext";
 import { Link } from "react-router-dom"
+import { deleteSession } from "../services/api";
 
 export default function LogOut ({displayLogOut, setDisplayLogOut}) {
 
     
     const [exit, setExit] = useState("inline")
-    const { userData, setUserData } = useContext(UserContext);
+    const { userData, setUserData, config } = useContext(UserContext);
 
-    function logOut() {
-        //chamar uma rota axios pra excluir a session do usuario
+    async function logOut() {
+        try {
+            await deleteSession(config)
+        } catch (error) {
+            console.log(error)
+        }
         localStorage.removeItem("user")
         setDisplayLogOut("none")
         setExit("none")

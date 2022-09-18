@@ -1,11 +1,14 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function Logo () {
 
     return (
         <Container>
-            <h1>É o bicho!</h1>
-            <p>Pet Shop</p>
+            <Link to = {"/"}>
+                <h1>É o bicho!</h1>
+                <p>Pet Shop</p>
+            </Link>
         </Container>
     )
 }

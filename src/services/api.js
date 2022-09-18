@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "https://ehobicho.herokuapp.com/";
+//const BASE_URL = "https://ehobicho.herokuapp.com";
+const BASE_URL = "http://localhost:5000";
 
 function postSignIn(data) {
   const promise = axios.post(`${BASE_URL}/signin`, data);
@@ -35,6 +36,10 @@ function deleteFavoriteProduct(config, body) {
   return axios.delete(`${BASE_URL}/favorites`, config);
 }
 
+function deleteSession(config) {
+  return axios.delete(`${BASE_URL}/logout`, config)
+}
+
 export {
   postSignIn,
   postSignUp,
@@ -43,4 +48,5 @@ export {
   getSingleProduct,
   postAddtoCart,
   deleteFavoriteProduct,
+  deleteSession
 };
