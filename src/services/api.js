@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://ehobicho.herokuapp.com/"; 
+const BASE_URL = "https://ehobicho.herokuapp.com"; 
 
 function postSignIn(data) {
   const promise = axios.post(`${BASE_URL}/signin`, data);
@@ -30,9 +30,10 @@ function getSingleProduct(productId) {
 function postAddtoCart(productId, config) {
   return axios.post(`${BASE_URL}/products/${productId}/addtocart`, {}, config);
 }
-function listProductsInCart(config){
+function getProductsInCart(config){
   return axios.get(`${BASE_URL}/cart`, config);
 }
+
 function listFavoriteProducts(config){
   return axios.get(`${BASE_URL}/favorites`, config);
 }
@@ -49,5 +50,5 @@ export {
   postAddtoCart,
   deleteFavoriteProduct,
   listFavoriteProducts,
-  listProductsInCart 
+  getProductsInCart 
 };

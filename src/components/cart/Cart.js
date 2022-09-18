@@ -3,11 +3,13 @@ import styled from "styled-components";
 import { IoTrashBin } from "react-icons/io5"
 import { HiPlusSm, HiMinusSm } from "react-icons/hi";
 import UserContext from "../../contexts/UserContext";
-import { deleteFavoriteProduct, listFavoriteProducts, listProductsInCart } from "../../services/api"
+import { deleteFavoriteProduct, getProductsInCart } from "../../services/api"
 
 export default function Cart(){
 
     const { config } = useContext(UserContext);
+
+    const [ productsInCart , setProductsInCart ] = useState(null);
 
     const products = [{
         title: "Biscoito Petz Clássico para Cães Adultos",
@@ -72,15 +74,6 @@ export default function Cart(){
         category: "dog"
       }];
 
-    const [ productsInCart ,setFavoriteProducts ] = useState(null);
-
-    function listProductInCart(){
-        try {
-            listProductsInCart(config);
-        } catch (error) {
-            console.log(error);
-        }
-    }
     function deleteProductInCart(title){
         const body = {title: title};
         try {
@@ -89,11 +82,12 @@ export default function Cart(){
             console.error(error);
         }
     }
+
     useEffect(() => {
 
-        const promise = listFavoriteProducts(config);
+        const promise = getProductsInCart(config);
         promise.then((res) => {
-            setFavoriteProducts(res.data);
+            setProductsInCart(res.data);
         });
 
     }, [config]);
