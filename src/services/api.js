@@ -31,8 +31,14 @@ function getSingleProduct(productId) {
 function postAddtoCart(productId, config) {
   return axios.post(`${BASE_URL}/products/${productId}/addtocart`, {}, config);
 }
+function getProductsInCart(config){
+  return axios.get(`${BASE_URL}/cart`, config);
+}
 
-function deleteFavoriteProduct(config, body) {
+function listFavoriteProducts(config){
+  return axios.get(`${BASE_URL}/favorites`, config);
+}
+function deleteFavoriteProduct(config){
   return axios.delete(`${BASE_URL}/favorites`, config);
 }
 
@@ -48,5 +54,7 @@ export {
   getSingleProduct,
   postAddtoCart,
   deleteFavoriteProduct,
+  listFavoriteProducts,
+  getProductsInCart,
   deleteSession
 };

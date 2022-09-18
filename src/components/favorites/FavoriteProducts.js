@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { AiOutlineStar, AiFillHeart } from "react-icons/ai";
 import UserContext from "../../contexts/UserContext";
-import { deleteFavoriteProduct } from "../../services/api";
+import { 
+    deleteFavoriteProduct, 
+    listFavoriteProducts 
+} from "../../services/api";
 
 export default function FavoriteProducts(){
 
     const { config } = useContext(UserContext);
+    const [ favoriteProducts, setFavoriteProducts ] = useState(null);
     
     const products = [{
         title: "Biscoito Petz Clássico para Cães Adultos",
@@ -40,16 +44,21 @@ export default function FavoriteProducts(){
     }
     
     function deleteFavoriteProducts(title){
-
         const body = {title: title};
-
         try {
             deleteFavoriteProduct(config, body);
-
         } catch (error) {
             console.error(error);
         }
     }
+    useEffect(() => {
+
+        const promise = listFavoriteProducts(config);
+        promise.then((res) => {
+            setFavoriteProducts(res.data);
+        });
+
+    }, [config]);
 
     return(
         <Container numberFavoriteProducts={products.length}>
@@ -89,12 +98,12 @@ export default function FavoriteProducts(){
                     }
                 </Favorite>
                 :
-                <EmptyCart>
+                <HaveNoFavorites>
                     <NoticeMessage>
                         <h2>Você ainda não adicionou nenhum produto como favorito...</h2>
                         <span>Basta clicar no coração do produto desejado.</span>
                     </NoticeMessage>
-                </EmptyCart>
+                </HaveNoFavorites>
             }
         </Container>
         
@@ -195,8 +204,7 @@ const FavoriteButton = styled.div`
         font-size: 16px;
     }
 `;
-
-const EmptyCart = styled.div`
+const HaveNoFavorites = styled.div`
     width: 90%;
     color: #262626;
 `;

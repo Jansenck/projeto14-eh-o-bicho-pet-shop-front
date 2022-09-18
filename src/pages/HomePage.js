@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Top from "../components/Top";
-import { Carousel } from "react-responsive-carousel";
+/* import { Carousel } from "react-responsive-carousel"; */
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Footer from "../components/Footer";
 import Highlights from "../components/Highlights";
