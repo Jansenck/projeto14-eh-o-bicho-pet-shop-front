@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://ehobicho.herokuapp.com/";
+const BASE_URL = "http://localhost:5000";
 
 function postSignIn(data) {
   const promise = axios.post(`${BASE_URL}/signin`, data);
@@ -23,7 +23,19 @@ function getProducts() {
   return axios.get(`${BASE_URL}/products`);
 }
 
-function getSingleProduct(productId) {
+function getDogProducts() {
+  return axios.get(`${BASE_URL}/products?category=dog`);
+}
+
+function getCatProducts() {
+  return axios.get(`${BASE_URL}/products?category=cat`);
+}
+
+function getFishProducts() {
+  return axios.get(`${BASE_URL}/products?category=fish`);
+}
+
+function getProductDetails(productId) {
   return axios.get(`${BASE_URL}/products/${productId}`);
 }
 
@@ -40,7 +52,10 @@ export {
   postSignUp,
   handleForm,
   getProducts,
-  getSingleProduct,
+  getProductDetails,
   postAddtoCart,
   deleteFavoriteProduct,
+  getDogProducts,
+  getCatProducts,
+  getFishProducts,
 };
