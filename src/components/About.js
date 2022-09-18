@@ -24,7 +24,7 @@ const Container = styled.div`
     width: 80vw;
     margin-bottom: 20px;
     color: white;
-    background-color: #02c39a;
+    background-color: orange;
     border-radius: 0px 10px 10px 10px;
     box-shadow: 1px 1px 1px grey;
     padding: 10px;
