@@ -30,7 +30,9 @@ export default function Top () {
                     <ion-icon name="menu-outline"></ion-icon>
                 </Menu>
                 <LogoText>
-                    É o bicho!
+                    <Link to = {"/"}>
+                        É o bicho!
+                    </Link>
                 </LogoText>
                 <Icons>
                     <ion-icon name="person-outline" onClick = {showLogOut}></ion-icon>
