@@ -8,13 +8,20 @@ import { Input, Button, Text } from "../styles/SignIn&UpStyles";
 import Logo from "../components/Logo";
 
 export default function SignInPage() {
+  
   const { userData, setUserData, config, setConfig } = useContext(UserContext);
   const [form, setForm] = useState({});
-  const navigate = useNavigate();
   const [load, setLoad] = useState("Entrar");
   const [disabled, setDisabled] = useState("");
   const [background, setBackground] = useState("#FFFFFF");
   const [color, setColor] = useState("#02c39a");
+  const captureForm = (event) => handleForm({ name: event.target.name, value: event.target.value },form,setForm);
+  const navigate = useNavigate();
+
+  const inputData = [
+    {placeholder: "Email", type: "email", name: "email", functionForm:  captureForm},
+    {placeholder: "Senha", type: "password", name: "password", functionForm:  captureForm},
+  ]
 
   function userLogin(event) {
     event.preventDefault();
@@ -25,11 +32,12 @@ export default function SignInPage() {
   async function sendLogin() {
     try {
       const response = await postSignIn(form);
-      const { token, name } = response.data;
-      const { email, password } = form;
+      const { token, name, address, cpf} = response.data;
+      const { email } = form;
+      delete form.password
 
-      localStorage.setItem("user", JSON.stringify({ ...form, token, name }));
-      setUserData({ ...userData, email, password, token, name });
+      localStorage.setItem("user", JSON.stringify({ ...form, token, name , address, cpf}));
+      setUserData({ ...userData, email, token, name, address, cpf });
       setConfig({
         ...config,
         headers: {
@@ -37,7 +45,7 @@ export default function SignInPage() {
         },
       });
 
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       const status = error.response.status;
       enabledForm();
@@ -69,38 +77,8 @@ export default function SignInPage() {
       <Logo />
       <Container>
         <form onSubmit={userLogin}>
-          <Input
-            placeholder="Email"
-            type="email"
-            name="email"
-            required
-            disabled={disabled}
-            background={background}
-            color={color}
-            onChange={(event) =>
-              handleForm(
-                { name: event.target.name, value: event.target.value },
-                form,
-                setForm
-              )
-            }
-          />
-          <Input
-            placeholder="Senha"
-            type="password"
-            name="password"
-            required
-            disabled={disabled}
-            background={background}
-            color={color}
-            onChange={(event) =>
-              handleForm(
-                { name: event.target.name, value: event.target.value },
-                form,
-                setForm
-              )
-            }
-          />
+        {inputData.map((value, index) => <Input key = {index} placeholder = {value.placeholder} type = {value.type} name = {value.name}
+          disabled = {disabled} background = {background} color = {color} onChange = {value.functionForm}/>)}
           <Button type="submit" disabled={disabled}>
             {load}
           </Button>

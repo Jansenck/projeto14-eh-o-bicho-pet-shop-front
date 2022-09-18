@@ -13,6 +13,9 @@ export default function CartPage(){
                 <MdOutlineArrowBackIosNew onClick={() => navigate("/products")}/>
                 <h2>Carrinho</h2>
             </ComeBackHeader>
+            <SessionName>
+                <p>Produtos</p>
+            </SessionName>
             <Cart/>
         </>
     );
@@ -29,7 +32,7 @@ const ComeBackHeader  = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #F9E6B3;;
-    color: ##454545;
+    color: #232323;;
     svg{
         position: absolute;
         left: 5vw;
@@ -42,4 +45,14 @@ const ComeBackHeader  = styled.div`
         font-weight: 700;
     }
 
+`;
+
+const SessionName = styled.div`
+    margin-top: 10vh;
+    height: 4vh;
+    width: 100%;
+    padding: 0 5%;
+    box-sizing: border-box;
+    font-weight: 700;
+    color: #232323;
 `;

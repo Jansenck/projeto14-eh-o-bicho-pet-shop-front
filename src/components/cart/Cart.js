@@ -1,8 +1,9 @@
 import { useEffect, useContext, useState } from "react";
 import styled from "styled-components";
 import { IoTrashBin } from "react-icons/io5"
+import { HiPlusSm, HiMinusSm } from "react-icons/hi";
 import UserContext from "../../contexts/UserContext";
-import { deleteFavoriteProduct, listFavoriteProducts,  } from "../../services/api"
+import { deleteFavoriteProduct, listFavoriteProducts, listProductsInCart } from "../../services/api"
 
 export default function Cart(){
 
@@ -27,10 +28,59 @@ export default function Cart(){
         description: " Indicado para cães; Sabor de salmão e romã; Snacks integral; Com prebióticos; Antioxidantes naturais; Fonte de ômega 3; Livre de transgênicos; Alimentos para cães adultos; Disponível em embalagem de 150g.",
         image: "https://static.petz.com.br/fotos/1628688839662.jpg",
         category: "dog"
-    }];
+    },{
+        title: "Biscoito Petz Clássico para Cães Adultos",
+        price: "16.99",
+        description: " Indicado para cães; Crocante e saboroso; Auxilia no controle do tártaro; Com hexametafosfato de sódio; Alimentos para cães adultos; Disponível em embalagem de 500g e 1kg.",
+        image: "https://static.petz.com.br/fotos/1628688499151.jpg",
+        category: "dog"
+    },{
+        title: "Bifinho Petz Strip Churrasco para Cães",
+        price: "3.69",
+        description: "",
+        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
+        category: "dog"
+    },{
+        title: "Biscoito Petz Clássico para Cães Adultos",
+        price: "16.99",
+        description: " Indicado para cães; Crocante e saboroso; Auxilia no controle do tártaro; Com hexametafosfato de sódio; Alimentos para cães adultos; Disponível em embalagem de 500g e 1kg.",
+        image: "https://static.petz.com.br/fotos/1628688499151.jpg",
+        category: "dog"
+      },{
+        title: "Bifinho Petz Strip Churrasco para Cães",
+        price: "3.69",
+        description: "",
+        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
+        category: "dog"
+      },{
+        title: "Bifinho Petz Strip Churrasco para Cães",
+        price: "3.69",
+        description: "",
+        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
+        category: "dog"
+      },{
+        title: "Bifinho Petz Strip Churrasco para Cães",
+        price: "3.69",
+        description: "",
+        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
+        category: "dog"
+      },{
+        title: "Bifinho Petz Strip Churrasco para Cães",
+        price: "3.69",
+        description: "",
+        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
+        category: "dog"
+      }];
 
-    const [ favoriteProducts ,setFavoriteProducts ] = useState(null);
+    const [ productsInCart ,setFavoriteProducts ] = useState(null);
 
+    function listProductInCart(){
+        try {
+            listProductsInCart(config);
+        } catch (error) {
+            console.log(error);
+        }
+    }
     function deleteProductInCart(title){
         const body = {title: title};
         try {
@@ -50,7 +100,6 @@ export default function Cart(){
 
     return(
         <Container numberProductsInCart={products.length}>
-            <h1>Produtos</h1>
             {
                products?
                 <Products>
@@ -73,9 +122,19 @@ export default function Cart(){
                                         <hr></hr>
                                         <ValueAndQuantity>
                                                 <h1>R$ {price.replace(".", ",")}</h1>
+                                                <QuantityProducts>
+                                                    <Minus>
+                                                        <HiMinusSm/>
+                                                    </Minus>
+                                                    <Quantity>
+                                                        <p>{1} <br></br> Qtd.</p>
+                                                    </Quantity>
+                                                    <Plus>
+                                                        <HiPlusSm/>
+                                                    </Plus>
+                                                </QuantityProducts>
                                         </ValueAndQuantity>
                                     </ProductInfos>
-
                                 </Product>
                             );
                         })
@@ -95,10 +154,8 @@ export default function Cart(){
 }
 
 const Container = styled.div`
-    margin: 10vh 0;
     display: grid;
-    grid-template-rows: repeat(${(props) => props.numberProductsInCart}, 0.2fr);
-    padding: 0 5%;
+    padding: 0 5% 10%;
 `;
 const Products = styled.div`
 
@@ -171,7 +228,38 @@ const ProductInfos = styled.div`
         }
 `;
 const ValueAndQuantity = styled.div`
-
+    display: grid;
+    grid-template-columns: 6fr 3.6fr;
+    height: 100%;
+`;
+const QuantityProducts = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    grid-gap: .2em;
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.55rem;
+        box-sizing: border-box;
+        line-height: 10px;
+        border-radius: 3px;
+    }
+    svg{
+        font-size: 20px;
+        color: #FFFFFF;
+    }
+`;
+const Minus = styled.div`
+    background-color: ${(props) => props.theme.lightblue};
+`;
+const Plus = styled.div`
+    background-color: ${(props) => props.theme.lightblue};
+`;
+const Quantity = styled.div`
+    background-color: #C4C4C4;
+    border: 1px solid #ccc;
 `;
 const TrashBin = styled.div`
     height: 30px;
