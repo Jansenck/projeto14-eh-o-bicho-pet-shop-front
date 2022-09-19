@@ -25,15 +25,15 @@ function getProducts() {
 }
 
 function getDogProducts() {
-  return axios.get(`${BASE_URL}/products?category=dog`);
+  return axios.get(`${BASE_URL}/products?category=Cachorros`);
 }
 
 function getCatProducts() {
-  return axios.get(`${BASE_URL}/products?category=cat`);
+  return axios.get(`${BASE_URL}/products?category=Gatos`);
 }
 
 function getFishProducts() {
-  return axios.get(`${BASE_URL}/products?category=fish`);
+  return axios.get(`${BASE_URL}/products?category=Peixes`);
 }
 
 function getProductDetails(productId) {
@@ -54,7 +54,7 @@ function deleteFavoriteProduct(config) {
   return axios.delete(`${BASE_URL}/favorites`, config);
 }
 
-function listCheckoutProducts(config){
+function listCheckoutProducts(config) {
   return axios.get(`${BASE_URL}/checkout`, config);
 }
 

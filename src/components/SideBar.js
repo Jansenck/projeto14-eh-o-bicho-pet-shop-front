@@ -37,17 +37,13 @@ export default function SideBar({
         <List>
           <TextList>
             <Session route={"/products"} type={"Todos"} classCss={""} />
+            <Session route={"/products/dog"} type={"Cães"} classCss={""} />
+            <Session route={"/products/cat"} type={"Gatos"} classCss={""} />
             <Session
-              route={"/products?category=dog"}
-              type={"Cães"}
-              classCss={""}
+              route={"/products/fish"}
+              type={"Peixes"}
+              classCss={"last"}
             />
-            <Session
-              route={"/products?category=cat"}
-              type={"Gatos"}
-              classCss={""}
-            />
-            <Session route={"/fish"} type={"Peixes"} classCss={"last"} />
           </TextList>
           <IconsList>
             <Link to={"/cart"}>
