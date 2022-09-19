@@ -80,7 +80,9 @@ export default function ProductsPage() {
         ""
       ) : (
         <ContentWrapper>
+
           {products.map((product) => (
+          
             <ProductsWrapper
               key={product._id}
               onClick={() => {
