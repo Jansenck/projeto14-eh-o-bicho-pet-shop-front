@@ -73,7 +73,6 @@ export {
   listFavoriteProducts,
   getProductsInCart,
   listCheckoutProducts,
-  deleteSession
   deleteSession,
   getDogProducts,
   getCatProducts,
