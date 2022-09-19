@@ -1,7 +1,6 @@
 import axios from "axios";
 
-//const BASE_URL = "https://ehobicho.herokuapp.com";
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://ehobicho.herokuapp.com";
 
 function postSignIn(data) {
   const promise = axios.post(`${BASE_URL}/signin`, data);
@@ -46,12 +45,18 @@ function postAddtoCart(productId, config) {
 function getProductsInCart(config) {
   return axios.get(`${BASE_URL}/cart`, config);
 }
+function deleteProductInCart(productId, config){
+  return axios.delete(`${BASE_URL}/cart/${productId}`, config);
+}
+function postTicketCheckout(body, config){
+  return axios.post(`${BASE_URL}/cart`, body, config);
+}
 
 function listFavoriteProducts(config) {
   return axios.get(`${BASE_URL}/favorites`, config);
 }
-function deleteFavoriteProduct(config) {
-  return axios.delete(`${BASE_URL}/favorites`, config);
+function deleteFavoriteProduct(config, productId) {
+  return axios.delete(`${BASE_URL}/favorites/${productId}`, config);
 }
 
 function listCheckoutProducts(config){
@@ -72,9 +77,11 @@ export {
   deleteFavoriteProduct,
   listFavoriteProducts,
   getProductsInCart,
+  deleteProductInCart,
   listCheckoutProducts,
   deleteSession,
   getDogProducts,
   getCatProducts,
   getFishProducts,
+  postTicketCheckout,
 };

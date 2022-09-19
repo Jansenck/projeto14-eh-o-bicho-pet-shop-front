@@ -1,18 +1,16 @@
 import { useEffect, useContext, useState } from "react";
-import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { IoTrashBin } from "react-icons/io5"
+import styled from "styled-components";
 import { HiPlusSm, HiMinusSm } from "react-icons/hi";
 import UserContext from "../../contexts/UserContext";
-import { deleteFavoriteProduct, getProductsInCart } from "../../services/api"
+import { deleteProductInCart, getProductsInCart, postTicketCheckout } from "../../services/api"
 
 export default function Cart(){
-
+    const navigate = useNavigate();
     const { config } = useContext(UserContext);
-
     const [ productsInCart , setProductsInCart ] = useState([]);
-
-
-
+    
     function calculateAmount(){
         let value = 0;
         productsInCart.forEach(product => {
@@ -21,11 +19,25 @@ export default function Cart(){
         });
         return value?.toFixed(2).replace(".", ",");
     }
-
-    function deleteProductInCart(title){
-        const body = {title: title};
+    
+    async function deleteProductsInCart(productId){
         try {
-            deleteFavoriteProduct(config, body);
+            await deleteProductInCart(productId, config);
+
+            const promise = getProductsInCart(config);
+            promise.then((res) => {
+                setProductsInCart(res.data);
+            });
+            
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    async function continueToCheckout(){
+        try {
+            const body = productsInCart;
+            await postTicketCheckout(body, config);
+            navigate("/checkout")
         } catch (error) {
             console.error(error);
         }
@@ -38,7 +50,7 @@ export default function Cart(){
             setProductsInCart(res.data);
         });
 
-    }, [config]);
+    },[config]);
 
     return(
         <Container numberProductsInCart={productsInCart.length}>
@@ -48,7 +60,8 @@ export default function Cart(){
                     <Products>
                         {
                             productsInCart.map((product, index) => {
-                                const { title, price, image } = product;
+                                const { title, price, image, productId } = product;
+
                                 return (
                                     <Product key={index}>                                  
                                             <img src={image} alt={image} />
@@ -59,15 +72,17 @@ export default function Cart(){
                                                 </ProductTitle>
                                                 
                                                 <TrashBin>
-                                                    <IoTrashBin onClick={() => deleteProductInCart(title)}/>
+                                                    <IoTrashBin onClick={() => deleteProductsInCart(productId)}/>
                                                 </TrashBin>
                                             </ProductHeader>
                                             <hr></hr>
                                             <ValueAndQuantity>
-                                                    <h1>R$ {price?.toFixed(2).replace(".", ",")}</h1>
+                                                    <h1>R$ {price?.replace(".", ",")}</h1>
                                                     <QuantityProducts>
-                                                        <Minus>
-                                                            <HiMinusSm/>
+                                                        <Minus 
+                                                            disable={productsInCart === 1}
+                                                        >
+                                                            <HiMinusSm />
                                                         </Minus>
                                                         <Quantity>
                                                             <p>{1} <br></br> Qtd.</p>
@@ -99,16 +114,15 @@ export default function Cart(){
                             <p>Total ({productsInCart.length} itens)</p>
                             <span>R$ {calculateAmount()}</span>
                         </div>
-                        <ContinueToPay>Continuar</ContinueToPay>
+                        <ContinueToPay ocClick={continueToCheckout()}>Continuar</ContinueToPay>
                     </Footer>
                </>
                 
                 :
                 <EmptyCart>
-                <NoticeMessage>
-                    <h2>Você ainda não adicionou nenhum produto como favorito...</h2>
-                    <span>Basta clicar no coração do produto desejado.</span>
-                </NoticeMessage>
+                    <NoticeMessage>
+                        <h2>Você ainda não adicionou nenhum produto ao carrinho...</h2>
+                    </NoticeMessage>
                 </EmptyCart>
             }
             
@@ -117,8 +131,12 @@ export default function Cart(){
 }
 
 const Container = styled.div`
+    height: 100%;
+    margin-top: 5%;
     display: grid;
-    padding: 0 5% 20%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 25%;
 `;
 const Products = styled.div`
 
@@ -257,7 +275,7 @@ const Total = styled.span`
     font-weight: 700;
 `;
 const Minus = styled.div`
-    background-color: ${(props) => props.theme.lightblue};
+    background-color: ${(props) => props.numberProductsInCart > 1? props.theme.lightblue : "#ccc"};
 `;
 const Plus = styled.div`
     background-color: ${(props) => props.theme.lightblue};
@@ -278,6 +296,9 @@ const TrashBin = styled.div`
     }
 `;
 const EmptyCart = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 90%;
     color: #262626;
 `;
