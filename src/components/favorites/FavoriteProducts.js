@@ -11,28 +11,9 @@ import {
 export default function FavoriteProducts(){
 
     const { config } = useContext(UserContext);
-    const [ favoriteProducts, setFavoriteProducts ] = useState(null);
+    const [ favoriteProducts, setFavoriteProducts ] = useState([]);
     
-    const products = [{
-        title: "Biscoito Petz Clássico para Cães Adultos",
-        price: "16.99",
-        description: " Indicado para cães; Crocante e saboroso; Auxilia no controle do tártaro; Com hexametafosfato de sódio; Alimentos para cães adultos; Disponível em embalagem de 500g e 1kg.",
-        image: "https://static.petz.com.br/fotos/1628688499151.jpg",
-        category: "dog"
-      }, {
-        title: "Bifinho Petz Strip Churrasco para Cães",
-        price: "3.69",
-        description: "",
-        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
-        category: "dog"
-      },
-      {
-        title: "Snacks Petz Assados Ômega 3 para Cães Adultos Sabor Salmão e Romã 150g",
-        price: "10.49",
-        description: " Indicado para cães; Sabor de salmão e romã; Snacks integral; Com prebióticos; Antioxidantes naturais; Fonte de ômega 3; Livre de transgênicos; Alimentos para cães adultos; Disponível em embalagem de 150g.",
-        image: "https://static.petz.com.br/fotos/1628688839662.jpg",
-        category: "dog"
-    }];
+
 
     function InstallmentPrice(price){
         const productPrice = price?.price;
@@ -61,12 +42,12 @@ export default function FavoriteProducts(){
     }, [config]);
 
     return(
-        <Container numberFavoriteProducts={products.length}>
+        <Container numberFavoriteProducts={favoriteProducts.length}>
             {
-                products?
+                favoriteProducts?
                 <Favorite>
                     {
-                        products.map((product, index) => {
+                        favoriteProducts.map((product, index) => {
                             const { title, price, image } = product;
                             return (
                                 <Product key={index}>

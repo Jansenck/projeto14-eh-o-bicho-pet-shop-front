@@ -9,70 +9,18 @@ export default function Cart(){
 
     const { config } = useContext(UserContext);
 
-    const [ productsInCart , setProductsInCart ] = useState(null);
+    const [ productsInCart , setProductsInCart ] = useState([]);
 
-    const products = [{
-        title: "Biscoito Petz Clássico para Cães Adultos",
-        price: "16.99",
-        description: " Indicado para cães; Crocante e saboroso; Auxilia no controle do tártaro; Com hexametafosfato de sódio; Alimentos para cães adultos; Disponível em embalagem de 500g e 1kg.",
-        image: "https://static.petz.com.br/fotos/1628688499151.jpg",
-        category: "dog"
-      }, {
-        title: "Bifinho Petz Strip Churrasco para Cães",
-        price: "3.69",
-        description: "",
-        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
-        category: "dog"
-      },
-      {
-        title: "Snacks Petz Assados Ômega 3 para Cães Adultos Sabor Salmão e Romã 150g",
-        price: "10.49",
-        description: " Indicado para cães; Sabor de salmão e romã; Snacks integral; Com prebióticos; Antioxidantes naturais; Fonte de ômega 3; Livre de transgênicos; Alimentos para cães adultos; Disponível em embalagem de 150g.",
-        image: "https://static.petz.com.br/fotos/1628688839662.jpg",
-        category: "dog"
-    },{
-        title: "Biscoito Petz Clássico para Cães Adultos",
-        price: "16.99",
-        description: " Indicado para cães; Crocante e saboroso; Auxilia no controle do tártaro; Com hexametafosfato de sódio; Alimentos para cães adultos; Disponível em embalagem de 500g e 1kg.",
-        image: "https://static.petz.com.br/fotos/1628688499151.jpg",
-        category: "dog"
-    },{
-        title: "Bifinho Petz Strip Churrasco para Cães",
-        price: "3.69",
-        description: "",
-        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
-        category: "dog"
-    },{
-        title: "Biscoito Petz Clássico para Cães Adultos",
-        price: "16.99",
-        description: " Indicado para cães; Crocante e saboroso; Auxilia no controle do tártaro; Com hexametafosfato de sódio; Alimentos para cães adultos; Disponível em embalagem de 500g e 1kg.",
-        image: "https://static.petz.com.br/fotos/1628688499151.jpg",
-        category: "dog"
-      },{
-        title: "Bifinho Petz Strip Churrasco para Cães",
-        price: "3.69",
-        description: "",
-        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
-        category: "dog"
-      },{
-        title: "Bifinho Petz Strip Churrasco para Cães",
-        price: "3.69",
-        description: "",
-        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
-        category: "dog"
-      },{
-        title: "Bifinho Petz Strip Churrasco para Cães",
-        price: "3.69",
-        description: "",
-        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
-        category: "dog"
-      },{
-        title: "Bifinho Petz Strip Churrasco para Cães",
-        price: "3.69",
-        description: "",
-        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
-        category: "dog"
-      }];
+
+
+    function calculateAmount(){
+        let value = 0;
+        productsInCart.forEach(product => {
+            const { price } = product;
+            value += parseFloat(price);
+        });
+        return value.toFixed(2).replace(".", ",");
+    }
 
     function deleteProductInCart(title){
         const body = {title: title};
@@ -93,47 +41,68 @@ export default function Cart(){
     }, [config]);
 
     return(
-        <Container numberProductsInCart={products.length}>
+        <Container numberProductsInCart={productsInCart.length}>
             {
-               products?
-                <Products>
-                    {
-                        products.map((product, index) => {
-                            const { title, price, image } = product;
-                            return (
-                                <Product key={index}>                                  
-                                        <img src={image} alt={image} />
-                                    <ProductInfos>
-                                        <ProductHeader>
-                                            <ProductTitle>
-                                                {title}
-                                            </ProductTitle>
-                                            
-                                            <TrashBin>
-                                                <IoTrashBin onClick={() => deleteProductInCart(title)}/>
-                                            </TrashBin>
-                                        </ProductHeader>
-                                        <hr></hr>
-                                        <ValueAndQuantity>
-                                                <h1>R$ {price.replace(".", ",")}</h1>
-                                                <QuantityProducts>
-                                                    <Minus>
-                                                        <HiMinusSm/>
-                                                    </Minus>
-                                                    <Quantity>
-                                                        <p>{1} <br></br> Qtd.</p>
-                                                    </Quantity>
-                                                    <Plus>
-                                                        <HiPlusSm/>
-                                                    </Plus>
-                                                </QuantityProducts>
-                                        </ValueAndQuantity>
-                                    </ProductInfos>
-                                </Product>
-                            );
-                        })
-                    }
-                </Products> 
+               productsInCart.length > 0?
+               <>
+                    <Products>
+                        {
+                            productsInCart.map((product, index) => {
+                                const { title, price, image } = product;
+                                return (
+                                    <Product key={index}>                                  
+                                            <img src={image} alt={image} />
+                                        <ProductInfos>
+                                            <ProductHeader>
+                                                <ProductTitle>
+                                                    {title}
+                                                </ProductTitle>
+                                                
+                                                <TrashBin>
+                                                    <IoTrashBin onClick={() => deleteProductInCart(title)}/>
+                                                </TrashBin>
+                                            </ProductHeader>
+                                            <hr></hr>
+                                            <ValueAndQuantity>
+                                                    <h1>R$ {price.replace(".", ",")}</h1>
+                                                    <QuantityProducts>
+                                                        <Minus>
+                                                            <HiMinusSm/>
+                                                        </Minus>
+                                                        <Quantity>
+                                                            <p>{1} <br></br> Qtd.</p>
+                                                        </Quantity>
+                                                        <Plus>
+                                                            <HiPlusSm/>
+                                                        </Plus>
+                                                    </QuantityProducts>
+                                            </ValueAndQuantity>
+                                        </ProductInfos>
+                                    </Product>
+                                );
+                            })
+                        }
+                    </Products>
+                    <ResumeOrder>
+                        <h3>Resumo do pedido</h3>
+                        <ResumeQuantity>
+                            <p>Produtos <span>({productsInCart.length} itens)</span></p>
+                            <Total>{calculateAmount()}</Total>
+                        </ResumeQuantity>
+                        <ResumeTotal>
+                            <p>Total</p>
+                            <Total>{calculateAmount()}</Total>
+                        </ResumeTotal>
+                    </ResumeOrder>
+                    <Footer>
+                        <div>
+                            <p>Total ({productsInCart.length} itens)</p>
+                            <span>R$ {calculateAmount()}</span>
+                        </div>
+                        <ContinueToPay>Continuar</ContinueToPay>
+                    </Footer>
+               </>
+                
                 :
                 <EmptyCart>
                 <NoticeMessage>
@@ -149,7 +118,7 @@ export default function Cart(){
 
 const Container = styled.div`
     display: grid;
-    padding: 0 5% 10%;
+    padding: 0 5% 20%;
 `;
 const Products = styled.div`
 
@@ -245,6 +214,48 @@ const QuantityProducts = styled.div`
         color: #FFFFFF;
     }
 `;
+const ResumeOrder = styled.div`
+    margin-top: 5%;
+    height: 25vh;
+    display: grid;
+    grid-template-rows: 1.5fr 2.2fr 3fr;
+    font-size: .755rem;
+    color: #5A5A5A;
+    div{
+        border-top: 1px solid #CCC;
+        width: 90vw;
+        padding: 5% 0;
+        box-sizing: border-box;
+    }
+    h3{
+        font-weight: 700;
+        font-size: .9rem;
+        padding: 5% 0;
+    }
+`;
+const ResumeQuantity = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    span{
+        font-weight: 700; 
+    }
+`;
+const ResumeTotal = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    span{
+        font-size: 1.2rem;
+    }
+
+`;
+const Total = styled.span`
+    color: ${(props) => props.theme.lightblue};
+    font-weight: 700;
+`;
 const Minus = styled.div`
     background-color: ${(props) => props.theme.lightblue};
 `;
@@ -289,4 +300,33 @@ const NoticeMessage = styled.div`
         font-weight: 400;
         text-align: center;
     }
+`;
+const Footer = styled.div`
+    display: grid;
+    grid-template-columns: 3fr 2.5fr;
+    height: 10vh;
+    width: 100vw;
+    background-color: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    box-shadow: 2px -3px 4px 2px rgba(0,0,0,0.15);
+    align-items: center;
+    font-size: .75rem;
+    line-height: 1.2rem;
+    padding: 2% 4%;
+    box-sizing: border-box;
+    span{
+        font-size: 1rem;
+        font-weight: 700;
+        color: ${(props) => props.theme.lightblue}
+    }
+`;
+const ContinueToPay = styled.button`
+    border: none;
+    height: 90%;
+    color: #FFF;
+    background-color: #408b42;
+    border-radius: 5px;
 `;

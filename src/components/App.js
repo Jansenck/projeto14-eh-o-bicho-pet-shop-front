@@ -11,6 +11,7 @@ import ProductsPage from "../pages/ProductsPage";
 import ProductDetails from "../pages/ProductDetails";
 import CartPage from "../pages/CartPage";
 import FavoriteProductsPage from "../pages/FavoriteProductsPage";
+import CheckoutPages from "../pages/CheckoutPages";
 
 const theme = {
   white: "#FFFFFF",
@@ -54,6 +55,7 @@ export default function App() {
             <Route path="/favorites" element={<FavoriteProductsPage/>}></Route>
             <Route path="/cart" element={<CartPage/>}></Route>
             <Route path="/products" element={<ProductsPage />}></Route>
+            <Route path="/checkout" element={<CheckoutPages/>}></Route>
             <Route
               path="/products/:productId"
               element={<ProductDetails />}
