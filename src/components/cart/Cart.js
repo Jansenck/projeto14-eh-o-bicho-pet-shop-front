@@ -64,7 +64,9 @@ export default function Cart(){
                                             </ProductHeader>
                                             <hr></hr>
                                             <ValueAndQuantity>
+                                            
                                                     <h1>R$ {price?.toFixed(2).replace(".", ",")}</h1>
+
                                                     <QuantityProducts>
                                                         <Minus>
                                                             <HiMinusSm/>
