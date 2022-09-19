@@ -34,7 +34,6 @@ export default function SignUp() {
 
   async function sendRegistration() {
     const { name, password, confirmPassword } = form;
-    console.log(form)
 
     if (!isNaN(Number(name))) {
       alert("Digite um nome válido");
