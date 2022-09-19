@@ -1,59 +1,24 @@
+import { useEffect, useContext, useState } from "react";
 import styled from "styled-components";
+import { listCheckoutProducts } from "../../services/api";
+import UserContext from "../../contexts/UserContext";
 
 export default function Checkout(){
 
-    const products = [{
-        title: "Biscoito Petz Clássico para Cães Adultos",
-        price: "16.99",
-        description: " Indicado para cães; Crocante e saboroso; Auxilia no controle do tártaro; Com hexametafosfato de sódio; Alimentos para cães adultos; Disponível em embalagem de 500g e 1kg.",
-        image: "https://static.petz.com.br/fotos/1628688499151.jpg",
-        category: "dog"
-      }, {
-        title: "Bifinho Petz Strip Churrasco para Cães",
-        price: "3.69",
-        description: "",
-        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
-        category: "dog"
-      },
-      {
-        title: "Snacks Petz Assados Ômega 3 para Cães Adultos Sabor Salmão e Romã 150g",
-        price: "10.49",
-        description: " Indicado para cães; Sabor de salmão e romã; Snacks integral; Com prebióticos; Antioxidantes naturais; Fonte de ômega 3; Livre de transgênicos; Alimentos para cães adultos; Disponível em embalagem de 150g.",
-        image: "https://static.petz.com.br/fotos/1628688839662.jpg",
-        category: "dog"
-      },
-      {
-        title: "Bifinho Petz Strip Churrasco para Cães",
-        price: "3.69",
-        description: "",
-        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
-        category: "dog"
-      },
-      {
-        title: "Snacks Petz Assados Ômega 3 para Cães Adultos Sabor Salmão e Romã 150g",
-        price: "10.49",
-        description: " Indicado para cães; Sabor de salmão e romã; Snacks integral; Com prebióticos; Antioxidantes naturais; Fonte de ômega 3; Livre de transgênicos; Alimentos para cães adultos; Disponível em embalagem de 150g.",
-        image: "https://static.petz.com.br/fotos/1628688839662.jpg",
-        category: "dog"
-      },
-      {
-        title: "Bifinho Petz Strip Churrasco para Cães",
-        price: "3.69",
-        description: "",
-        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
-        category: "dog"
-      },
-      {
-        title: "Snacks Petz Assados Ômega 3 para Cães Adultos Sabor Salmão e Romã 150g",
-        price: "10.49",
-        description: " Indicado para cães; Sabor de salmão e romã; Snacks integral; Com prebióticos; Antioxidantes naturais; Fonte de ômega 3; Livre de transgênicos; Alimentos para cães adultos; Disponível em embalagem de 150g.",
-        image: "https://static.petz.com.br/fotos/1628688839662.jpg",
-        category: "dog"
-      }];
+    const { config } = useContext(UserContext);
+
+    const [ checkoutProducts, setCheckoutProducts ] = useState([]);
+
+    useEffect(() => {
+        const promise = listCheckoutProducts(config);
+        promise.then((res) => {
+            setCheckoutProducts(res.data);
+        });
+    });
 
     function calculateAmount(){
     let value = 0;
-    products.forEach(product => {
+    checkoutProducts.forEach(product => {
         const { price } = product;
         value += parseFloat(price);
     });
@@ -61,7 +26,7 @@ export default function Checkout(){
     }
     function calculateShipment(){
         let value = 0;
-        products.forEach(product => {
+        checkoutProducts.forEach(product => {
             const { price } = product;
             value += parseFloat(price);
         });
@@ -78,7 +43,7 @@ export default function Checkout(){
 
     return(
         <>
-            <Container quantity={products.length}>
+            <Container quantity={checkoutProducts.length}>
                 <DeliverySession>
                     <h1>Endereço da entrega</h1>
                     <DeliveryInfos>
@@ -94,7 +59,7 @@ export default function Checkout(){
                     <h3>Resumo do pedido</h3>
                     <ResumeProducts>
                     {
-                        products.map((product, index) => {
+                        checkoutProducts.map((product, index) => {
                             const { title, price } = product;
                             return(
                                 <div key={index}>
@@ -121,7 +86,7 @@ export default function Checkout(){
             </Container>
             <Footer>
                 <div>
-                    <p>Total ({products.length} itens)</p>
+                    <p>Total ({checkoutProducts.length} itens)</p>
                     <span>R$ {calculateTotal()}</span>
                 </div>
                 <ContinueToPay>Finalizar compra</ContinueToPay>

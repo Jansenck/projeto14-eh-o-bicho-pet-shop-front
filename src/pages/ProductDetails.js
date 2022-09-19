@@ -46,7 +46,7 @@ export default function ProductDetails() {
         <ProductTitle>{product.title}</ProductTitle>
         <img src={product.image} alt={product.title} />
         <Price>
-          <span>R$ {product.price?.toFixed(2).replace(".", ",")}</span>
+          <span>R$ {product.price?.replace(".", ",")}</span>
           <Icon isActive={isActive}>
             <TiHeartFullOutline />
           </Icon>

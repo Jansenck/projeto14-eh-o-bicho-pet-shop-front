@@ -34,7 +34,7 @@ export default function ProductsPage() {
         ""
       ) : (
         <ContentWrapper>
-          {products.map((product) => (
+          {products.map(product => (
             <ProductsWrapper
               onClick={() => {
                 navigate(`/products/${product._id}`);

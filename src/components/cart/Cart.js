@@ -9,45 +9,13 @@ export default function Cart(){
 
     const { config } = useContext(UserContext);
 
-    const [ productsInCart , setProductsInCart ] = useState(null);
+    const [ productsInCart , setProductsInCart ] = useState([]);
 
-    const products = [{
-        title: "Biscoito Petz Clássico para Cães Adultos",
-        price: "16.99",
-        description: " Indicado para cães; Crocante e saboroso; Auxilia no controle do tártaro; Com hexametafosfato de sódio; Alimentos para cães adultos; Disponível em embalagem de 500g e 1kg.",
-        image: "https://static.petz.com.br/fotos/1628688499151.jpg",
-        category: "dog"
-      }, {
-        title: "Bifinho Petz Strip Churrasco para Cães",
-        price: "3.69",
-        description: "",
-        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
-        category: "dog"
-      },
-      {
-        title: "Snacks Petz Assados Ômega 3 para Cães Adultos Sabor Salmão e Romã 150g",
-        price: "10.49",
-        description: " Indicado para cães; Sabor de salmão e romã; Snacks integral; Com prebióticos; Antioxidantes naturais; Fonte de ômega 3; Livre de transgênicos; Alimentos para cães adultos; Disponível em embalagem de 150g.",
-        image: "https://static.petz.com.br/fotos/1628688839662.jpg",
-        category: "dog"
-      },
-      {
-        title: "Biscoito Petz Clássico para Cães Adultos",
-        price: "16.99",
-        description: " Indicado para cães; Crocante e saboroso; Auxilia no controle do tártaro; Com hexametafosfato de sódio; Alimentos para cães adultos; Disponível em embalagem de 500g e 1kg.",
-        image: "https://static.petz.com.br/fotos/1628688499151.jpg",
-        category: "dog"
-      }, {
-        title: "Bifinho Petz Strip Churrasco para Cães",
-        price: "3.69",
-        description: "",
-        image: "https://static.petz.com.br/fotos/1628689273937.jpg",
-        category: "dog"
-      }];
+
 
     function calculateAmount(){
         let value = 0;
-        products.forEach(product => {
+        productsInCart.forEach(product => {
             const { price } = product;
             value += parseFloat(price);
         });
@@ -72,16 +40,14 @@ export default function Cart(){
 
     }, [config]);
 
-    console.log(productsInCart)
-
     return(
-        <Container numberProductsInCart={products.length}>
+        <Container numberProductsInCart={productsInCart.length}>
             {
-               products?
+               productsInCart.length > 0?
                <>
                     <Products>
                         {
-                            products.map((product, index) => {
+                            productsInCart.map((product, index) => {
                                 const { title, price, image } = product;
                                 return (
                                     <Product key={index}>                                  
@@ -120,7 +86,7 @@ export default function Cart(){
                     <ResumeOrder>
                         <h3>Resumo do pedido</h3>
                         <ResumeQuantity>
-                            <p>Produtos <span>({products.length} itens)</span></p>
+                            <p>Produtos <span>({productsInCart.length} itens)</span></p>
                             <Total>{calculateAmount()}</Total>
                         </ResumeQuantity>
                         <ResumeTotal>
@@ -130,7 +96,7 @@ export default function Cart(){
                     </ResumeOrder>
                     <Footer>
                         <div>
-                            <p>Total ({products.length} itens)</p>
+                            <p>Total ({productsInCart.length} itens)</p>
                             <span>R$ {calculateAmount()}</span>
                         </div>
                         <ContinueToPay>Continuar</ContinueToPay>
