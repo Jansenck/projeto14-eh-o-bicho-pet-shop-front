@@ -20,7 +20,7 @@ export default function SignUp() {
     {placeholder: "Nome", type: "text", name: "name", functionForm:  captureForm},
     {placeholder: "Email", type: "email", name: "email", functionForm:  captureForm},
     {placeholder: "Endereço", type: "text", name: "address", functionForm:  captureForm},
-    {placeholder: "CEP", type: "text", name: "cep", functionForm:  captureForm},
+    {placeholder: "CEP (Somente números)", type: "text", name: "cep", functionForm:  captureForm},
     {placeholder: "CPF (Somente números)", type: "text", name: "cpf", functionForm:  captureForm},
     {placeholder: "Senha", type: "password", name: "password", functionForm:  captureForm},
     {placeholder: "Confirme sua senha", type: "password", name: "confirmPassword", functionForm:  captureForm}
@@ -33,7 +33,7 @@ export default function SignUp() {
   }
 
   async function sendRegistration() {
-    const { name, password, confirmPassword } = form;
+    const { name, password, confirmPassword, cpf, cep} = form;
     console.log(form)
 
     if (!isNaN(Number(name))) {
@@ -45,6 +45,16 @@ export default function SignUp() {
       alert("Confirme sua senha corretamente");
       enabledForm();
       return;
+    }
+    if(cpf.length != 11) {
+      alert("Digite um cpf válido")
+      enabledForm();
+      return
+    }
+    if(cep.length != 8) {
+      alert("Digite um cep válido")
+      enabledForm();
+      return
     }
 
     try {
