@@ -19,7 +19,7 @@ export default function Cart(){
             const { price } = product;
             value += parseFloat(price);
         });
-        return value.toFixed(2).replace(".", ",");
+        return value?.toFixed(2).replace(".", ",");
     }
 
     function deleteProductInCart(title){
@@ -64,7 +64,7 @@ export default function Cart(){
                                             </ProductHeader>
                                             <hr></hr>
                                             <ValueAndQuantity>
-                                                    <h1>R$ {price.replace(".", ",")}</h1>
+                                                    <h1>R$ {price?.toFixed(2).replace(".", ",")}</h1>
                                                     <QuantityProducts>
                                                         <Minus>
                                                             <HiMinusSm/>

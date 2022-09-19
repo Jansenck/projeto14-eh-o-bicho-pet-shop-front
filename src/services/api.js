@@ -24,22 +24,33 @@ function getProducts() {
   return axios.get(`${BASE_URL}/products`);
 }
 
-function getSingleProduct(productId) {
+function getDogProducts() {
+  return axios.get(`${BASE_URL}/products?category=dog`);
+}
+
+function getCatProducts() {
+  return axios.get(`${BASE_URL}/products?category=cat`);
+}
+
+function getFishProducts() {
+  return axios.get(`${BASE_URL}/products?category=fish`);
+}
+
+function getProductDetails(productId) {
   return axios.get(`${BASE_URL}/products/${productId}`);
 }
 
 function postAddtoCart(productId, config) {
   return axios.post(`${BASE_URL}/products/${productId}/addtocart`, {}, config);
 }
-function getProductsInCart(config){
-  console.log(config)
+function getProductsInCart(config) {
   return axios.get(`${BASE_URL}/cart`, config);
 }
 
-function listFavoriteProducts(config){
+function listFavoriteProducts(config) {
   return axios.get(`${BASE_URL}/favorites`, config);
 }
-function deleteFavoriteProduct(config){
+function deleteFavoriteProduct(config) {
   return axios.delete(`${BASE_URL}/favorites`, config);
 }
 
@@ -48,7 +59,7 @@ function listCheckoutProducts(config){
 }
 
 function deleteSession(config) {
-  return axios.delete(`${BASE_URL}/logout`, config)
+  return axios.delete(`${BASE_URL}/logout`, config);
 }
 
 export {
@@ -56,11 +67,14 @@ export {
   postSignUp,
   handleForm,
   getProducts,
-  getSingleProduct,
+  getProductDetails,
   postAddtoCart,
   deleteFavoriteProduct,
   listFavoriteProducts,
   getProductsInCart,
   listCheckoutProducts,
-  deleteSession
+  deleteSession,
+  getDogProducts,
+  getCatProducts,
+  getFishProducts,
 };

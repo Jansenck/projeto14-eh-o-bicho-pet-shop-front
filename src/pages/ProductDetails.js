@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getSingleProduct, postAddtoCart } from "../services/api";
+import { getProductDetails, postAddtoCart } from "../services/api";
 import UserContext from "../contexts/UserContext";
 import styled from "styled-components";
 import { Button } from "../styles/SignIn&UpStyles";
@@ -16,7 +16,7 @@ export default function ProductDetails() {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    const promise = getSingleProduct(productId);
+    const promise = getProductDetails(productId);
 
     promise.then((res) => {
       setProduct(res.data);
@@ -46,7 +46,7 @@ export default function ProductDetails() {
         <ProductTitle>{product.title}</ProductTitle>
         <img src={product.image} alt={product.title} />
         <Price>
-          <span>R$ {product.price?.replace(".", ",")}</span>
+          <span>R$ {product.price?.toFixed(2).replace(".", ",")}</span>
           <Icon isActive={isActive}>
             <TiHeartFullOutline />
           </Icon>

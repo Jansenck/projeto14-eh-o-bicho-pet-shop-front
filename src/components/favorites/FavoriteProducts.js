@@ -13,8 +13,6 @@ export default function FavoriteProducts(){
     const { config } = useContext(UserContext);
     const [ favoriteProducts, setFavoriteProducts ] = useState([]);
     
-
-
     function InstallmentPrice(price){
         const productPrice = price?.price;
         let installment = (productPrice/3).toFixed(2); 

@@ -1,13 +1,18 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getProducts } from "../services/api";
+import { useEffect, useState } from "react";
+import {
+  getProducts,
+  getCatProducts,
+  getDogProducts,
+  getFishProducts,
+} from "../services/api";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Top from "../components/Top";
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const promise = getProducts();
@@ -17,25 +22,58 @@ export default function ProductsPage() {
     });
   }, []);
 
+  async function Dogs(e) {
+    e.preventDefault();
+    const promise = getDogProducts();
+
+    promise.then((res) => {
+      setProducts(res.data);
+    });
+  }
+
+  async function Cats(e) {
+    e.preventDefault();
+    const promise = getCatProducts();
+
+    promise.then((res) => {
+      setProducts(res.data);
+    });
+  }
+
+  async function Fishes(e) {
+    e.preventDefault();
+    const promise = getFishProducts();
+
+    promise.then((res) => {
+      setProducts(res.data);
+    });
+  }
+
   return (
     <>
       <Top />
-      <Banner>
-        <img
-          src="https://images2.imgbox.com/d4/70/JcaMrf3Q_o.png"
-          alt="Setembro Vermelho"
-        />
-      </Banner>
-      <Menu>
-        <h1>CÃES</h1> <h1>GATOS</h1> <h1>PEIXES</h1>
-      </Menu>
+      <Wrapper>
+        <Banner>
+          <img
+            src="https://images2.imgbox.com/d4/70/JcaMrf3Q_o.png"
+            alt="Setembro Vermelho"
+          />
+        </Banner>
+        <Menu>
+          <h1 onClick={Dogs}>CÃES</h1>
+          <h1 onClick={Cats}>GATOS</h1>
+          <h1 onClick={Fishes}>PEIXES</h1>
+        </Menu>
+      </Wrapper>
 
       {products.length === 0 ? (
         ""
       ) : (
         <ContentWrapper>
           {products.map(product => (
+          
             <ProductsWrapper
+              key={product._id}
               onClick={() => {
                 navigate(`/products/${product._id}`);
               }}
@@ -67,7 +105,7 @@ const ProductsWrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  margin: 30px 20px 150px;
+  margin: 340px 20px 150px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -99,7 +137,7 @@ const Price = styled.h4`
 `;
 
 const Banner = styled.div`
-  margin-top: 85px;
+  background-color: ${(props) => props.theme.white};
   box-shadow: 8px 2px 4px 2px rgba(0, 0, 0, 0.1);
   img {
     width: 100vw;
@@ -114,4 +152,10 @@ const Menu = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  cursor: pointer;
+`;
+
+const Wrapper = styled.div`
+  position: fixed;
+  top: 80px;
 `;
