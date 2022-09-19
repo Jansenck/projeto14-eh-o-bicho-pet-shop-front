@@ -32,7 +32,7 @@ const ComeBackHeader  = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #F9E6B3;;
-    color: #232323;;
+    color: #454545;
     svg{
         position: absolute;
         left: 5vw;

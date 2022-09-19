@@ -72,6 +72,8 @@ export default function Cart(){
 
     }, [config]);
 
+    console.log(productsInCart)
+
     return(
         <Container numberProductsInCart={products.length}>
             {
