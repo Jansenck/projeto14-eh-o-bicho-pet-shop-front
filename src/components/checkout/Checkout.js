@@ -2,19 +2,21 @@ import { useEffect, useContext, useState } from "react";
 import styled from "styled-components";
 import { listCheckoutProducts } from "../../services/api";
 import UserContext from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Checkout(){
 
-    const { config } = useContext(UserContext);
+    const { config, userData } = useContext(UserContext);
+    const navigate = useNavigate()
 
     const [ checkoutProducts, setCheckoutProducts ] = useState([]);
-
+    /*
     useEffect(() => {
         const promise = listCheckoutProducts(config);
         promise.then((res) => {
             setCheckoutProducts(res.data);
         });
-    });
+    });*/
 
     function calculateAmount(){
     let value = 0;
@@ -40,18 +42,27 @@ export default function Checkout(){
         const total = amount + shipment;      
         return total.toFixed(2).replace(".",",");
     }
+    function finalCheckout() {
+        const check = window.confirm("Deseja finalizar a compra?")
+        if (!check) {
+            return
+        }
+        alert("Pedido efetuado com sucesso!")
+        navigate("/")
+    }
 
     return(
         <>
             <Container quantity={checkoutProducts.length}>
                 <DeliverySession>
-                    <h1>Endereço da entrega</h1>
+                    <h1>{userData.address}</h1>
                     <DeliveryInfos>
-                        <h2>Monguinho</h2>
+                        <h2>{userData.name}</h2>
                         <DeliveryAddress>
-                            <p>nome da rua</p>
-                            <p>Bairro</p>
-                            <p>CEP</p>
+                            <p>{userData.address}</p>
+                            <p>{userData.email}</p>
+                            <p>CEP: {userData.cep}</p>
+                            <p>CPF: {userData.cpf}</p>
                         </DeliveryAddress>
                     </DeliveryInfos>
                 </DeliverySession>
@@ -71,7 +82,7 @@ export default function Checkout(){
                     }                      
                     </ResumeProducts>
                     <ShipmentTo>
-                        <p>Entrega para <span>13566-590</span></p>
+                        <p>Entrega para <span>{userData.cep}</span></p>
                         <span>R$ {calculateShipment()}</span>
                     </ShipmentTo>
                     <DeliveryTime>
@@ -89,7 +100,7 @@ export default function Checkout(){
                     <p>Total ({checkoutProducts.length} itens)</p>
                     <span>R$ {calculateTotal()}</span>
                 </div>
-                <ContinueToPay>Finalizar compra</ContinueToPay>
+                <ContinueToPay onClick = {finalCheckout}>Finalizar compra</ContinueToPay>
             </Footer>
         </>
     );

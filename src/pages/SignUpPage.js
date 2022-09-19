@@ -20,6 +20,7 @@ export default function SignUp() {
     {placeholder: "Nome", type: "text", name: "name", functionForm:  captureForm},
     {placeholder: "Email", type: "email", name: "email", functionForm:  captureForm},
     {placeholder: "Endereço", type: "text", name: "address", functionForm:  captureForm},
+    {placeholder: "CEP", type: "text", name: "cep", functionForm:  captureForm},
     {placeholder: "CPF (Somente números)", type: "text", name: "cpf", functionForm:  captureForm},
     {placeholder: "Senha", type: "password", name: "password", functionForm:  captureForm},
     {placeholder: "Confirme sua senha", type: "password", name: "confirmPassword", functionForm:  captureForm}
@@ -33,6 +34,7 @@ export default function SignUp() {
 
   async function sendRegistration() {
     const { name, password, confirmPassword } = form;
+    console.log(form)
 
     if (!isNaN(Number(name))) {
       alert("Digite um nome válido");
@@ -52,12 +54,12 @@ export default function SignUp() {
       enabledForm();
       const status = error.response.status;
       if (status === 409) {
-        alert("Já existe um usuário com esse email");
+        alert("Já existe um usuário com esse email ou cpf");
         return;
       }
       if (status === 422) {
         alert(
-          "Preencha os campos corretamente. O nome deve conter no máximo 15 caracteres"
+          "O nome deve conter no máximo 15 caracteres e os dados devem ser válidos"
         );
         return;
       }
