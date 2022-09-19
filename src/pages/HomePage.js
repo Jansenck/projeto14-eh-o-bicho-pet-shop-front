@@ -10,12 +10,12 @@ import About from "../components/About";
 export default function HomePage() {
 
   const highlightsData = [
-    {image: "https://static.petz.com.br/fotos/1628689148983.jpg", title: "BIFINHO É O BICHO", 
+    {image: "https://static.petz.com.br/fotos/1628688988393.jpg", title: "BIFINHO É O BICHO", 
     description: "Bifinho de frango. Altamente nutritivo e saboroso.",
-    id: "63254996c94d48bff408dad2"},
+    id: "6328a240b0eb505cf10d37b6"},
     {image: "https://static.petz.com.br/fotos/1660162896325.jpg", title: "RAÇÂO PREMIUM", 
     description: "Ração de alta qualidade nutritiva. Rica em ômega 3 e ferro para o seu cão.",
-    id: "63254996c94d48bff408dac0"}
+    id: "6328a240b0eb505cf10d37ad"}
   ]
 
   return (
