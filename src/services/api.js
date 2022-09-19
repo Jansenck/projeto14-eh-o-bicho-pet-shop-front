@@ -54,6 +54,10 @@ function deleteFavoriteProduct(config) {
   return axios.delete(`${BASE_URL}/favorites`, config);
 }
 
+function listCheckoutProducts(config){
+  return axios.get(`${BASE_URL}/checkout`, config);
+}
+
 function deleteSession(config) {
   return axios.delete(`${BASE_URL}/logout`, config);
 }
@@ -68,6 +72,7 @@ export {
   deleteFavoriteProduct,
   listFavoriteProducts,
   getProductsInCart,
+  listCheckoutProducts,
   deleteSession,
   getDogProducts,
   getCatProducts,

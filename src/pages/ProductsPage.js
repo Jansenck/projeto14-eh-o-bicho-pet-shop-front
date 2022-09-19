@@ -70,7 +70,8 @@ export default function ProductsPage() {
         ""
       ) : (
         <ContentWrapper>
-          {products.map((product) => (
+          {products.map(product => (
+
             <ProductsWrapper
               key={product._id}
               onClick={() => {
