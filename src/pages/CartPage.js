@@ -54,5 +54,5 @@ const SessionName = styled.div`
     padding: 0 5%;
     box-sizing: border-box;
     font-weight: 700;
-    color: #232323;
+    color: #454545;
 `;

@@ -126,6 +126,13 @@ export default function Cart(){
                             <Total>{calculateAmount()}</Total>
                         </ResumeTotal>
                     </ResumeOrder>
+                    <Footer>
+                        <div>
+                            <p>Total ({products.length} itens)</p>
+                            <span>R$ {calculateAmount()}</span>
+                        </div>
+                        <ContinueToPay>Continuar</ContinueToPay>
+                    </Footer>
                </>
                 
                 :
@@ -143,7 +150,7 @@ export default function Cart(){
 
 const Container = styled.div`
     display: grid;
-    padding: 0 5% 10%;
+    padding: 0 5% 20%;
 `;
 const Products = styled.div`
 
@@ -325,4 +332,33 @@ const NoticeMessage = styled.div`
         font-weight: 400;
         text-align: center;
     }
+`;
+const Footer = styled.div`
+    display: grid;
+    grid-template-columns: 3fr 2.5fr;
+    height: 10vh;
+    width: 100vw;
+    background-color: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    box-shadow: 2px -3px 4px 2px rgba(0,0,0,0.15);
+    align-items: center;
+    font-size: .75rem;
+    line-height: 1.2rem;
+    padding: 2% 4%;
+    box-sizing: border-box;
+    span{
+        font-size: 1rem;
+        font-weight: 700;
+        color: ${(props) => props.theme.lightblue}
+    }
+`;
+const ContinueToPay = styled.button`
+    border: none;
+    height: 90%;
+    color: #FFF;
+    background-color: #408b42;
+    border-radius: 5px;
 `;
