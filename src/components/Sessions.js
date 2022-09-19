@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 function Card({ type, route, source }) {
   return (
     <Box>
-      <img src={source} alt={type} />
-      <h2>{type}</h2>
       <Link to={`${route}`}>
+        <img src={source} alt={type} />
+        <h2>{type}</h2>
         <Shop>
           <p>SHOP</p>
           <ion-icon name="chevron-forward-outline"></ion-icon>
@@ -17,17 +17,43 @@ function Card({ type, route, source }) {
 }
 
 export default function Sessions() {
-
   const cardsData = [
-    {type: "TODOS", route: "products", source: "https://img.freepik.com/fotos-gratis/lindo-retrato-de-animal-de-estimacao-de-um-pequeno-cao-e-gato_23-2149218509.jpg?w=1380&t=st=1663511580~exp=1663512180~hmac=9c17eaa747252cc9771e326d345929ac7dc9251bb79e81553c4b7831e271b0bf"},
-    {type: "CÃES", route: "dogs", source: "https://img.freepik.com/fotos-gratis/lindo-retrato-de-cachorro_23-2149218452.jpg?w=1480&t=st=1663266957~exp=1663267557~hmac=b52c5e6bbd84f9ced4b9f3c83b851feccf070302874ac2eadd4a639b2276026c"},
-    {type: "GATOS", route: "cats", source: "https://img.freepik.com/fotos-gratis/gatinho-adoravel-com-parede-monocromatica-atras-dela_23-2148955144.jpg?w=1380&t=st=1663268100~exp=1663268700~hmac=e7657cbe75eb3303f11ffbea37edd196c869d1b390b667d585a86a6dc3dd9e6b"},
-    {type: "PEIXES", route: "fish", source: "https://t4.ftcdn.net/jpg/02/53/61/69/240_F_253616948_za22DUrpvoM6aBDyPZxXDXf1OVNZFhL4.jpg"},
-  ]
+    {
+      type: "TODOS",
+      route: "products",
+      source:
+        "https://img.freepik.com/fotos-gratis/lindo-retrato-de-animal-de-estimacao-de-um-pequeno-cao-e-gato_23-2149218509.jpg?w=1380&t=st=1663511580~exp=1663512180~hmac=9c17eaa747252cc9771e326d345929ac7dc9251bb79e81553c4b7831e271b0bf",
+    },
+    {
+      type: "CÃES",
+      route: "/products/dog",
+      source:
+        "https://img.freepik.com/fotos-gratis/lindo-retrato-de-cachorro_23-2149218452.jpg?w=1480&t=st=1663266957~exp=1663267557~hmac=b52c5e6bbd84f9ced4b9f3c83b851feccf070302874ac2eadd4a639b2276026c",
+    },
+    {
+      type: "GATOS",
+      route: "/products/cat",
+      source:
+        "https://img.freepik.com/fotos-gratis/gatinho-adoravel-com-parede-monocromatica-atras-dela_23-2148955144.jpg?w=1380&t=st=1663268100~exp=1663268700~hmac=e7657cbe75eb3303f11ffbea37edd196c869d1b390b667d585a86a6dc3dd9e6b",
+    },
+    {
+      type: "PEIXES",
+      route: "/products/fish",
+      source:
+        "https://t4.ftcdn.net/jpg/02/53/61/69/240_F_253616948_za22DUrpvoM6aBDyPZxXDXf1OVNZFhL4.jpg",
+    },
+  ];
 
   return (
     <Container>
-      {cardsData.map((value, index) => <Card key = {index} type = {value.type} route = {value.route} source = {value.source}/>)}
+      {cardsData.map((value, index) => (
+        <Card
+          key={index}
+          type={value.type}
+          route={value.route}
+          source={value.source}
+        />
+      ))}
     </Container>
   );
 }

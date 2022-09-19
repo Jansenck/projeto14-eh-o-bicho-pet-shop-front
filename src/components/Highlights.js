@@ -1,27 +1,24 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-export default function Highlights({image, title, description, id}) {
-
-  const navigate = useNavigate()
+export default function Highlights({ image, title, description, id }) {
+  const navigate = useNavigate();
 
   return (
     <Container>
       <Favorite>
-        <img
-          src={image}
-          width={200}
-          height={200}
-          alt="products"
-        />
+        <img src={image} width={200} height={200} alt="products" />
         <h2>{title}</h2>
         <Description>
-          <p>
-            {description}
-          </p>
+          <p>{description}</p>
         </Description>
-        <Button onClick={() => {navigate(`/products/${id}`)}}>Ver produto</Button>
+        <Button
+          onClick={() => {
+            navigate(`/products/${id}`);
+          }}
+        >
+          Ver produto
+        </Button>
       </Favorite>
     </Container>
   );
