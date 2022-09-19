@@ -12,6 +12,9 @@ import ProductDetails from "../pages/ProductDetails";
 import CartPage from "../pages/CartPage";
 import FavoriteProductsPage from "../pages/FavoriteProductsPage";
 import CheckoutPages from "../pages/CheckoutPages";
+import CatsProductsPage from "./products/Cats";
+import DogsProductsPage from "./products/Dogs";
+import FishesProductsPage from "./products/Fish";
 
 const theme = {
   white: "#FFFFFF",
@@ -52,13 +55,20 @@ export default function App() {
             <Route path="/" element={<HomePage />}></Route>
             <Route path="/signin" element={<SignInPage />}></Route>
             <Route path="/signup" element={<SignUpPage />}></Route>
-            <Route path="/favorites" element={<FavoriteProductsPage/>}></Route>
-            <Route path="/cart" element={<CartPage/>}></Route>
+            <Route path="/favorites" element={<FavoriteProductsPage />}></Route>
+            <Route path="/cart" element={<CartPage />}></Route>
             <Route path="/products" element={<ProductsPage />}></Route>
-            <Route path="/checkout" element={<CheckoutPages/>}></Route>
+            <Route path="/checkout" element={<CheckoutPages />}></Route>
             <Route
               path="/products/:productId"
               element={<ProductDetails />}
+            ></Route>
+            <Route path="/products/cat" element={<CatsProductsPage />}></Route>
+            <Route path="/products/dog" element={<DogsProductsPage />}></Route>
+
+            <Route
+              path="/products/fish"
+              element={<FishesProductsPage />}
             ></Route>
           </Routes>
         </BrowserRouter>

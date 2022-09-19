@@ -77,7 +77,9 @@ export default function Cart(){
                                             </ProductHeader>
                                             <hr></hr>
                                             <ValueAndQuantity>
-                                                    <h1>R$ {price?.replace(".", ",")}</h1>
+                                            
+                                                    <h1>R$ {price?.toFixed(2).replace(".", ",")}</h1>
+
                                                     <QuantityProducts>
                                                         <Minus 
                                                             disable={productsInCart === 1}

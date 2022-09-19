@@ -5,17 +5,17 @@ import {
   getCatProducts,
   getDogProducts,
   getFishProducts,
-} from "../services/api";
+} from "../../services/api";
 import styled from "styled-components";
-import Footer from "../components/Footer";
-import Top from "../components/Top";
+import Footer from "../../components/Footer";
+import Top from "../../components/Top";
 
-export default function ProductsPage() {
+export default function CatsProductsPage() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const promise = getProducts();
+    const promise = getCatProducts();
 
     promise.then((res) => {
       setProducts(res.data);
@@ -80,9 +80,7 @@ export default function ProductsPage() {
         ""
       ) : (
         <ContentWrapper>
-
           {products.map((product) => (
-          
             <ProductsWrapper
               key={product._id}
               onClick={() => {
