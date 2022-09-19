@@ -6,14 +6,12 @@ import styled from "styled-components";
 import { Button } from "../styles/SignIn&UpStyles";
 import Footer from "../components/Footer";
 import Top from "../components/Top";
-import { TiHeartFullOutline } from "react-icons/ti";
 
 export default function ProductDetails() {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
   const navigate = useNavigate();
   const { config } = useContext(UserContext);
-  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     const promise = getProductDetails(productId);
@@ -47,9 +45,6 @@ export default function ProductDetails() {
         <img src={product.image} alt={product.title} />
         <Price>
           <span>R$ {product.price?.toFixed(2).replace(".", ",")}</span>
-          <Icon isActive={isActive}>
-            <TiHeartFullOutline />
-          </Icon>
         </Price>
         <BuyButton onClick={AddtoCart}>Adicionar ao Carrinho</BuyButton>
 
@@ -85,12 +80,6 @@ const Price = styled.h4`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-`;
-
-const Icon = styled.div`
-  cursor: pointer;
-  color: ${(props) =>
-    props.isActive ? props.theme.red : props.theme.darkblue};
 `;
 
 const Description = styled.div`
